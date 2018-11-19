@@ -1,0 +1,148 @@
+@font-face {
+	font-family:'henry';
+	font-weight:400; 
+	font-style: normal;
+	src: url('../fonts/HenriRegular.eot'); 
+	src: url('../fonts/HenriRegular.eot?#iefix') format('embedded-opentype'), 
+	url('../fonts/HenriRegular.woff') format('woff'), 
+	url('../fonts/HenriRegular.ttf') format('truetype');
+}
+@import url('https://fonts.googleapis.com/css?family=Rubik:400,900');
+
+#dj-header , #show-header{
+	background-position: center;
+	background-size: cover;
+	height: 400px;
+	border: solid 6px #000000;
+}
+.dj-title , .showpage-title , .show-dj{
+	background-color: #000;
+	color:#fff;
+    padding: 10px 40px;
+    position: relative;
+    top: -40px;
+    height: 70px;
+    font-family: henry;
+}
+#dj #content , .shows-list , #show #content{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.flex-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;	
+}
+.shows-list{
+	background-image: url('../images/bg-dj.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	color:#fff;
+}
+.dj-desc , .show-desc{
+	/*border: solid 6px #ffffff;*/
+    width: 614px;
+    margin: 90px auto;	
+    font-family: henry;
+    font-size: 16px;
+}
+.dj-title-container , .show-title-container{
+	height:0px;
+}
+.show-item{
+	display: block;
+	margin: 0 auto;
+	width: 500px;
+	min-height: 120px;
+	background-color: #1b1d1c;
+	border: solid 3px #ffffff;	
+	padding: 12px;
+	margin-bottom: 20px;
+}
+
+.show-item .date{
+	float: left;
+	text-align: left;
+  width: 107px;
+  height: 14px;
+  font-family: Rubik;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #646464;
+}
+
+.show-item .dj{
+  font-family: henri;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: right;
+  color: #ffffff;
+}
+.show-item p{
+	margin: 0 5px;
+}
+.show-item .episode-title{
+	font-family: Rubik;
+	font-size: 14px;
+	font-weight: 400;
+}
+.show-item .show-title{
+	font-family: Rubik;
+	font-size: 16px;
+	font-weight: 900;
+	margin-bottom:5px;
+}
+
+.show-tag{	
+	border:1px solid #fff;
+	margin:0 5px;
+  font-family: Henri;
+  font-size: 12px;	
+  padding:4px;
+}
+.show-item:hover {
+    text-decoration: none;
+}
+
+@media (max-width: 767px) {
+	.dj-desc, .show-desc {
+		max-width: 100%;
+		margin: 70px auto;
+		padding: 0 20px;
+	}
+	.dj-title, .showpage-title, .show-dj {
+		padding: 10px 30px;
+		font-size: 2rem;
+	}
+	.dj-social-links {
+		max-width: 100%;
+	}
+	
+	.about-wrapper h1 {
+		margin-top: 3rem;
+		font-size: 2rem;
+	}
+	.about-content {
+		font-size: 16px;
+	}
+	a.about-anchor {
+		padding: 3px 8px;
+		margin-left: 8px;
+		font-size: 13px;
+	}
+	.about-wrapper h2 {
+		font-size: 1.5rem;
+	}
+	.about-content img {
+		width: 100%;
+	}
+}

@@ -1,0 +1,203 @@
+/* All */
+body {
+	unicode-bidi:embed;
+	font-size:18px;
+	font-style:normal;
+	font-weight:normal;
+	line-height:1;
+}
+p {line-height:1.5;}
+p:last-of-type {margin-bottom:0;}
+a {color:inherit;}
+a:hover, a:focus {color:inherit;}
+img {max-width:100%; height:auto;}
+.container {padding-right:0; padding-left:0;}
+.row {margin-right:0; margin-left:0;}
+.touch .displaytouch {display:block;}
+.touch .displaynotouch {display:none;}
+.no-touch .displaytouch {display:none;}
+.no-touch .displaynotouch {display:block;}
+.relative {position:relative;}
+.nopadding {padding-left:0; padding-right:0;}
+iframe {max-width:100%;}
+div.wpcf7 .ajax-loader {position:absolute;}
+.row>#content {width:100%;}
+
+.clearfix:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+/* Bootstrap prefix */
+.form-inline {
+	display:-webkit-box; display:-ms-flexbox; display:-webkit-flex; display:flex;
+	-ms-flex-flow:row wrap; -webkit-flex-flow:row wrap; flex-flow:row wrap;
+	-webkit-align-items:center; align-items:center;
+}
+.navbar-nav {display:-webkit-box; display:-ms-flexbox; display:-webkit-flex; display:flex;}
+.row, .form-row {
+	display:-webkit-box; display:-ms-flexbox; display:-webkit-flex; display:flex;
+	-ms-flex-wrap:wrap; -webkit-flex-wrap:wrap; flex-wrap:wrap;
+}
+
+/* Menu */
+.navbar-nav {padding-right:0;}
+.icon-bar {display:block; width:45px; background-color:#fff; border-radius:20px; height:10px; color:#fff; margin:0 auto;}
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {padding-left:0; padding-right:0;}
+
+@media (max-width: 768px) {
+	.displayto768 {display:block;}
+	.displayfrom768 {display:none;}
+}
+@media (min-width: 769px) {
+	.displayto768 {display:none;}
+	.displayfrom768 {display:block;}
+}
+
+/* Rtl */
+.rtl {direction:rtl; text-align:right;}
+
+
+/* Header */
+#header {
+	background: url(../images/header-bg.jpg) no-repeat top center;
+	background-size: cover;
+}
+#header .navbar {
+	width: 100%;
+	padding: 8px 36px 0;
+	/*background-color: black;*/
+}
+#header .navbar-expand-md {
+	justify-content: space-between;
+}
+#header .header-main {
+	text-align: center;
+}
+
+#header .navbar-brand {
+	margin-right: 0;
+}
+#header .powered {
+	width: 200px;
+	text-align: left;
+}
+#header .powered img {
+	width: 50px;
+	height: auto;
+}
+#header .powered .powered-label {
+	margin-bottom: 6px;
+	font-size: 9px;
+	color: #fff;
+}
+
+#header .logo {
+	width: 148px;
+	height: auto;
+}
+
+#header li.menu-item a {
+	color: white;
+	padding: 4px;
+}
+
+#header li.menu-item a::after {
+	content: "/";
+	margin-right: 8px;
+    color: white;
+    font-size: 16px;
+}
+
+#header li.menu-item:last-of-type a::after {
+	content: "";
+}
+
+#header .search-icon {
+	width: 30px;
+  	height: 31px;
+}
+
+#header .donate-link {
+	position: relative;
+	height: 56px;
+	margin-right: 1rem;
+}
+
+#header .donate-image {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 56px;
+	width: 56px;
+}
+#header .donate-button {
+	height: 40px;
+	width: auto;
+	margin-left: 30px;
+}
+
+@media (max-width: 767px) {
+	#header .header-main {
+		width: 100%;
+	}
+	#header .logo {
+		width: 118px;
+	}
+	#header .navbar {
+		padding: 8px 10px 0;
+	}
+	.navbar-nav {
+		display: block;
+	}
+	.navbar-nav li {
+		display: inline-block;
+		font-size: 11px;
+	}
+	#header li.menu-item a {
+		padding-left: 0;
+	}
+	#header li.menu-item a::after {
+		margin-right: 5px;
+		font-size: 12px;
+	}
+	#header .powered {
+		position: absolute;
+		top: 6px;
+		left: 6px;
+		width: auto;
+	}
+	body #header .powered .powered-label {
+		margin-bottom: 4px;
+		font-size: 7px;
+	}
+	body #header .powered img {
+		width: 37px;
+	}
+	#header .left-stuff {
+		position: absolute;
+		top: 10px;
+	}
+	#header .donate-link {
+		margin-right: 0;
+	}
+	#header .donate-button {
+		height: 20px;
+		margin-left: 25px;
+	}
+	#header .donate-image {
+		width: 32px;
+		height: 32px;
+	}
+	#header .trigger-search {
+		position: absolute;
+		top: 26px;
+	}
+	#header .search-icon {
+		width: 16px;
+		height: 16px;
+	}
+}

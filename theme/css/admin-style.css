@@ -1,0 +1,2 @@
+body.rtl {direction:rtl; text-align:right;}
+.rtl .mce-container, .rtl .mce-container *, .rtl .mce-widget, .rtl .mce-widget *, .rtl .mce-reset {direction:rtl; text-align:right;}
