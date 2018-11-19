@@ -55,6 +55,7 @@
 </footer>
 <?php wp_footer(); ?>
 
+<?php include_once('schedule.php'); ?>
 <?php include_once('player-footer.js'); ?>
 <?php include_once('document-ready.js'); ?>
 

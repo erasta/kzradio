@@ -14,6 +14,7 @@ jQuery(document).ready(function ($) {
 			success:function(data){
 				filter.find('button').text('חפש'); // changing the button label back
 				var result = $(data).find('#response').html();
+				console.log( result + '****' );
 				$('#response').html(result);
 			}
 		});

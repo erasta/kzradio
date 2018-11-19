@@ -117,7 +117,7 @@ body {
 
 footer {
 	margin-bottom: 73px;
-	padding: 50px 1rem 75px;	
+	padding: 50px 1rem 75px;
 	background-color: #000000;/*#f4f4f4;*/
 	border: solid 6px #000000;
 }
@@ -180,14 +180,14 @@ footer {
   -moz-border-radius: 99em;
   border-radius: 99em;
   border: 5px solid black;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);  
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
 }
-	
+
 @media (max-width: 768px) {
   .hide-xs-down  {
     display: none !important;
   }
-	
+
 		.jp-time-holder
 	{
 		width:72%;
@@ -196,7 +196,7 @@ footer {
 	{
 		width:72%;
     }
-	
+
 	.floating-bar {
 /* 	background-color: #fff;
 	box-shadow: 0 0 9px rgba(0, 0, 0, 0.25); */
@@ -211,7 +211,7 @@ footer {
 	width: 100%;
 	z-index: 80; /* hide behind footer at bottom of page */
 }
-	
+
 		.player-row-style
 	{
 		background-color:black;
@@ -225,11 +225,11 @@ footer {
 		position:absolute;
 		top:0px;
 	}
-	
+
 	.jp-audio .jp-interface {
-     height: 60px; 
+     height: 60px;
      }
-	
+
 	.jp-audio .jp-controls
 	{
 		padding-top:5px;
@@ -238,13 +238,13 @@ footer {
 	{
 		top:20px;
 	}
-	.jp-audio .jp-time-holder 
+	.jp-audio .jp-time-holder
 	{
 		top:35px;
 	}
 }
 
-	
+
 @media (min-width: 767px) {
 	.jp-time-holder
 	{
@@ -256,12 +256,12 @@ footer {
 		color:white;
 		height:80px;
 	}
-	
+
 	.jp-progress-override
 	{
 		width:80%;
     }
-	
+
 	.floating-bar {
 /* 	background-color: #fff;
 	box-shadow: 0 0 9px rgba(0, 0, 0, 0.25); */
@@ -419,7 +419,7 @@ button {
 	background-color: #ef303b;
 	border: solid 2px #ffffff;
 	color: white;
-	outline: none;	
+	outline: none;
 	cursor: pointer;
 }
 input[type=reset] {
@@ -511,9 +511,9 @@ input[type=reset] {
 	text-decoration: none;
 }
 .od-item .show-link:hover ~ div.od-details .od-title,
-.od-details .od-title:hover, 
-.od-details .od-show-dj:hover, 
-.od-details .od-show-name:hover, 
+.od-details .od-title:hover,
+.od-details .od-show-dj:hover,
+.od-details .od-show-name:hover,
 .od-item .tags .tag:hover {
 	background: #fff;
 	color: black;
@@ -565,7 +565,7 @@ input[type=reset] {
 	transition: opacity .2s ease-in-out;
 }
 .od-item .play:hover {
-	opacity: 1;	
+	opacity: 1;
 }
 
 .results {
@@ -664,8 +664,8 @@ input[type=reset] {
 .episode-container {
 	background-color: #000000; /*fallback*/
 	background-image: url('theme/images/episode-bg.jpg');
-	background-repeat: repeat-y; 
-	background-size: 100% auto;	
+	background-repeat: repeat-y;
+	background-size: 100% auto;
 	color: #ffffff;
 	/*border: 6px solid #000000;*/
 }
@@ -797,9 +797,9 @@ input[type=reset] {
 }
 .all-djs-wrapper {
 	background-color: #000000; /* fallback */
-	background-repeat: repeat-y; 
+	background-repeat: repeat-y;
 	background-size: 100% auto;
-	color: #ffffff; 
+	color: #ffffff;
 	padding-bottom: 100px;
 }
 
@@ -831,7 +831,7 @@ input[type=reset] {
 	background:	#000000;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: cover;  
+	background-size: cover;
 }
 
 .dj-social-links {
@@ -843,7 +843,7 @@ input[type=reset] {
 	text-decoration: none;
 	opacity: 0.5;
 }
-.dj-social-links a:hover, 
+.dj-social-links a:hover,
 .dj-social-links a:active {
 	text-decoration: none;
 	opacity: 1;
@@ -1077,8 +1077,8 @@ body.page-template-page-support-us #main {
 		height: 40px;
 		border-width: 2px;
 	}
-	
-	
+
+
 	#wrapper-support .intro {
 		margin-bottom: 20px;
 		font-size: 18px;
@@ -1090,20 +1090,20 @@ body.page-template-page-support-us #main {
 	#wrapper-support .entry-content p {
 		margin-bottom: 20px;
 	}
-	
+
 	.od-item .tags {
 		display: block;
 		bottom: auto;
 		top: 0.5rem;
 	}
-	
+
 	.icons-container a {
 		margin: 0 0.5rem;
 	}
 	.icons-container img {
 		height: auto;
 	}
-	
+
 	#wrapper-schedule .schedule-table {
 		position: relative;
 	}
@@ -1122,11 +1122,11 @@ body.page-template-page-support-us #main {
 	#wrapper-schedule .schedule-table .day-column .show-box {
 		height: 80px !important;
 	}
-	
+
 	.no-shows-msg {
 		max-width: 100%;
 	}
-	
+
 	.footer-credits .title {
 		font-size: 16px;
 	}
@@ -1141,10 +1141,10 @@ body.page-template-page-support-us #main {
 }
 .about-wrapper {
 	background-color: #000000; /* fallback */
-	background-repeat: repeat-y; 
+	background-repeat: repeat-y;
 	background-size: cover; /*100% auto;*/
 	background-position: top center;
-	color: #ffffff; 
+	color: #ffffff;
 	padding-bottom: 100px;
 }
 .about-wrapper .container {
@@ -1158,8 +1158,8 @@ body.page-template-page-support-us #main {
 }
 .about-wrapper h2 {
 	background-color: rgba(200,200,200,0.3);
-	margin-top: 4rem; 
-	margin-bottom: 1rem; 
+	margin-top: 4rem;
+	margin-bottom: 1rem;
 	padding: 6px 12px;
 	font-family: Rubik, arial, sans-serif;
 }
@@ -1210,9 +1210,9 @@ a.about-anchor:active {
 }
 .contact-us-wrapper {
 	background-color: #000000; /* fallback */
-	background-repeat: repeat-y; 
+	background-repeat: repeat-y;
 	background-size: 100% auto;
-	color: #ffffff; 
+	color: #ffffff;
 	padding-bottom: 100px;
 }
 .contact-us-wrapper .container {
@@ -1226,8 +1226,8 @@ a.about-anchor:active {
 }
 .contact-us-wrapper h2 {
 	background-color: rgba(200,200,200,0.3);
-	margin-top: 4rem; 
-	margin-bottom: 1rem; 
+	margin-top: 4rem;
+	margin-bottom: 1rem;
 	padding: 6px 12px;
 	font-family: Rubik, arial, sans-serif;
 }
@@ -1246,7 +1246,7 @@ a.about-anchor:active {
 
 #contact_details {
 	margin-top: 2rem;
-	font-size: 20px; 
+	font-size: 20px;
 	font-family: Rubik, arial, sans-serif;
 }
 
@@ -1271,9 +1271,9 @@ a.about-anchor:active {
 .page-404 {
 	background-color: #000000; /* fallback */
     background-image: url('../../../wp-content/uploads/2018/11/404-bg.jpg');
-	background-repeat: no-repeat; 
+	background-repeat: no-repeat;
 	background-size: 100% auto;
-	color: #ffffff; 
+	color: #ffffff;
 	padding-bottom: 100px;
 }
 .page-404-wrapper {
@@ -1300,8 +1300,8 @@ a.about-anchor:active {
 .single-post {
 	background-color: #000000; /*fallback*/
 	background-image: url('../../../wp-content/uploads/2018/11/blog-post-bg.jpg');
-	background-repeat: repeat-y; 
-	background-size: 100% auto;	
+	background-repeat: repeat-y;
+	background-size: 100% auto;
 	color: #ffffff;
 }
 .single-post main.container-fluid {
@@ -1323,7 +1323,7 @@ a.about-anchor:active {
 	position: relative;	/* has absolute childred */
 }
 .single-post-container header .blog-post-titles,
-.single-post-container .single-post-content, 
+.single-post-container .single-post-content,
 .single-post-container footer {
 	max-width: 800px;
 }
@@ -1374,7 +1374,7 @@ a.about-anchor:active {
 .single-post-container footer .blog-post-meta {
 	padding: 0px 12px;
 }
-.single-post-container .single-post-content a, 
+.single-post-container .single-post-content a,
 .single-post-container footer a {
     text-decoration: underline;
 }

@@ -1,6 +1,6 @@
 <?php
 
-function get_show_schedule() {
+function get_show_schedule($daynum) {
 	$cat = get_term(get_sub_field('the_show'), 'shows');
 	$dj = get_term(get_field('show_dj', $cat->taxonomy . '_' . $cat->term_id )[0], 'djs');
 	$start = get_sub_field('starting_time');
@@ -15,13 +15,12 @@ function get_show_schedule() {
 	$image_id = get_field('show_image', $cat->taxonomy . '_' . $cat->term_id );
 	$show_image = wp_get_attachment_image_src( $image_id, 'next_shows' );
 	$show_image_full = wp_get_attachment_image_src( $image_id, 'full' );
-	$show_image_position = get_field('show_image_position', $cat->taxonomy . '_' . $cat->term_id ) ? get_field('show_image_position', $cat->taxonomy . '_' . $cat->term_id ) : 0;
 
 	$image = $is_special ? get_sub_field('customized_image') : $show_image[0];
 	$image_full = $is_special ? get_sub_field('customized_image') : $show_image_full[0];
 
 	$term = $cat->term_id;
-	return array(
+	$ret = array(
 		//"image_id" => $show_image_full,
 		"start" => $start,
 		"starthour" => $starthour,
@@ -32,16 +31,26 @@ function get_show_schedule() {
 		"dj_colour" => $dj_colour,
 		"image" => $image,
 		"image_full" => $image_full,
-		"image_position" => $show_image_position,
 		"desc" => $cat->description,
 		"linkshow" => strlen($cat->slug) == 0 ? "" : get_term_link( $term ),
 		"linkdj" => strlen($cat->slug) == 0 ? "" : get_term_link( $dj->term_id ),
-		"term" => $cat->term_id
-	);
+        "realtime" => $daynum . ' ' . $starthour . ' ' . $endhour,
+        "slug" => $cat->slug,
+        "term" => $cat->term_id
+    );
+
+    foreach ($ret as $key => $value) {
+        if (is_wp_error($ret[$key])) $ret[$key] = "";
+    }
+
+    $show_image_position = get_field('show_image_position', $cat->taxonomy . '_' . $cat->term_id );
+    if ($show_image_position) $ret["image_position"] = $show_image_position;
+
+    return $ret;
 }
 
-function assure_detail($obj, $fld, $val) {
-	if (!array_key_exists($fld, $obj) || !is_string($obj[$fld]) || strlen($obj[$fld]) == 0) {
+function assure_detail(&$obj, $fld, $val) {
+	if (!array_key_exists($fld, $obj) || is_wp_error($obj[$fld]) || !is_string($obj[$fld]) || strlen($obj[$fld]) == 0) {
 		$obj[$fld] = $val;
 	}
 	return $obj;
@@ -74,35 +83,46 @@ function print_raw_schedule($s) {
 // 	);
 // }
 
+
+function get_day_schedule($daynum) {
+    $days_names_eng = array('sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday');
+    $day = $days_names_eng[$daynum];
+    $dayarr = array();
+    $dayrow = $day . '_single_day_shows';
+    while ( have_rows($dayrow, 'options') ) {
+        the_row();
+        $curr = get_show_schedule($daynum);
+        if ($curr['show'] == '' || $curr['start'] == '') continue;
+        $dayarr[$curr['starthour'] * 100] = $curr;
+    }
+    ksort($dayarr, SORT_NUMERIC);
+    return array("daynum" => $daynum, "day" => $day, "times" => $dayarr);
+}
+
 function get_schedule() {
-	$days = array('sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday');
+    $days_names_eng = array('sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday');
 	$shows = array();
-	foreach ($days as $daynum => $day) {
-        $dayarr = array();
-		$dayrow = $day . '_single_day_shows';
-        while ( have_rows($dayrow, 'options') ) {
-            the_row();
-            $curr = get_show_schedule();
-            if ($curr['show'] == '' || $curr['start'] == '') continue;
-            $dayarr[$curr['starthour'] * 100] = $curr;
-        }
-        ksort($dayarr, SORT_NUMERIC);
-        $shows[$daynum] = array("daynum" => $daynum, "day" => $day, "times" => $dayarr);
+	foreach ($days_names_eng as $daynum => $day) {
+        $shows[$daynum] = get_day_schedule($daynum);
     }
 	return $shows;
 }
 
 function make_main_banner($showlive) {
-	echo '<div style="display:none">'; var_dump($showlive); echo '</div>';
+	// echo '<div style="display:none">'; var_dump($showlive); echo '</div>';
 	$blog = get_bloginfo('template_url');
-	$playbtn = array_key_exists("start", $showlive) ? '' : ' display: none';
+    $playbtn = array_key_exists("start", $showlive) ? '' : ' display: none';
+    $objpos = '';
+    if (array_key_exists("image_position", $showlive)) {
+        $objpos = 'object-position: 50% ' . $showlive["image_position"] . '%';
+    }
 	return
 '<div class="main-banner">
-	<div href="#" id="show-link-curr" >
+	<div href="#" id="show-link-curr" realtime="' . $showlive["realtime"] . '">
 		<img id="show-image-curr"
 			src="' . $showlive["image_full"] . '"
 			alt="' . $showlive["desc"] .'"
-			style="cursor: pointer; object-position: 50% ' . $showlive["image_position"] . '%"
+			style="cursor: pointer; ' . $objpos . '"
 			onclick="javascript:player_backtolive(\''. $showlive["image"] .'\',\''. $showlive["show"] .'\');return false;">
 		<span class="show-details">
 			<span class="blck-bg">
@@ -131,8 +151,7 @@ function make_main_banner($showlive) {
 function make_next_banner($showfirst, $num) {
 	$active = array_key_exists("start", $showfirst) ? '' : ' nonactive';
 	return
-'<div id="next-show-' . $num . '"
-	class="next-show-item' . $active .'">
+'<div id="next-show-' . $num . '" class="next-show-item' . $active .'" realtime="' . $showfirst["realtime"] . '">
 	<div class="show-overlay" style="background: ' . $showfirst["dj_colour"] . ';"></div>
 	<div id="show-link-' . $num . '">
 		<img id="show-image-' . $num . '"
@@ -170,14 +189,14 @@ function make_banners($curr, $next1, $next2, $next3) {
 </div>';
 }
 
-function get_curr_shows_impl($shows) {
+function get_curr_shows_impl() {
     // Getting today and tomorrow schedules
 	$date = new DateTime("now", new DateTimeZone("Israel") );
 	$hour = intval($date->format("H")) + intval($date->format("i")) / 60.0;
 	$daynum = intval($date->format("w"));
-	$daynumTomorrow = ($daynum + 1) % 7;
-	$today = $shows[$daynum]["times"] ?: array();
-    $tomorrow = $shows[$daynumTomorrow]["times"] ?: array();
+    $daynumTomorrow = ($daynum + 1) % 7;
+	$today = get_day_schedule($daynum)["times"] ?: array();
+    $tomorrow = get_day_schedule($daynumTomorrow)["times"] ?: array();
 
     // Filtering just shows that are in the preset or future
 	$fromnow = array_filter($today, function($s) use ($hour) {
@@ -185,7 +204,7 @@ function get_curr_shows_impl($shows) {
     });
 
     // Add empty show if first show is in the future
-	if (count($fromnow) == 0 || $fromnow[0]["starthour"] > $hour) {
+	if (count($fromnow) == 0 || reset($fromnow)["starthour"] > $hour) {
 		array_unshift($fromnow, array());
     }
 
@@ -212,7 +231,7 @@ function get_curr_shows_impl($shows) {
 }
 
 function get_curr_shows() {
-	get_curr_shows_impl(get_schedule());
+	get_curr_shows_impl();
 }
 
 function check_schedule_impl($shows) {
@@ -233,10 +252,10 @@ function check_schedule() {
 }
 
 function html_curr_schedule() {
-	$shows = get_schedule();
-	get_curr_shows_impl($shows);
-	echo '<$&$/>';
-	check_schedule_impl($shows);
+	// $shows = get_schedule();
+	get_curr_shows_impl();
+	// echo '<$&$/>';
+	// check_schedule_impl($shows);
 }
 
 add_action('wp_ajax_html_curr_schedule', 'html_curr_schedule');

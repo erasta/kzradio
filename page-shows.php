@@ -24,7 +24,7 @@ get_header();
 					<div class="row">
 						<div class="col-sm-12">
 							<?php /*<form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="shows-filter">*/ ?>
-							<form action="<?php echo site_url() ?>/last-shows #response" method="POST" id="shows-filter">
+							<form action="<?php // leave it empty (or talk to Avi :) ) ?>" method="POST" id="shows-filter">
 								<!--<div class="text-row">
 									<input id="textsearch" type="text" name="free_search" placeholder="חיפוש חופשי" />
 								</div>-->
@@ -107,13 +107,13 @@ get_header();
 									if( $query->have_posts() ) :
 										echo '<div class="on-demand-items">';
 										while( $query->have_posts() ): $query->the_post();
-									
+
 											get_template_part('loops/show');
-									
+
 										endwhile;
 										?>
 										<div class="kz-pagination">
-											<?php 
+											<?php
 												echo paginate_links( array(
 													'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
 													'total'        => $query->max_num_pages,
@@ -134,9 +134,42 @@ get_header();
 										<?php
 										wp_reset_postdata();
 										echo '</div>';
-									endif; 
+									endif;
 								}?>
-							</div>
+                            </div>
+							<script>
+								jQuery(document).ready(function () {
+									jQuery('#shows-filter').submit(function(e){
+										e.stopPropagation();
+										e.preventDefault();
+										var filter = jQuery('#shows-filter');
+										jQuery.ajax({
+											url:filter.attr('action'),
+											data:filter.serialize(), // form data
+											type:filter.attr('method'), // POST
+											beforeSend:function(xhr){
+												filter.find('button').text('מחפש...'); // changing the button label
+											},
+											success:function(data){
+												filter.find('button').text('חפש'); // changing the button label back
+												var result = jQuery(data).find('#response').html();
+												console.log( result + '****' );
+												jQuery('#response').html(result);
+											}
+										});
+										return false;
+									});
+									jQuery('#shows-filter').change(function() {
+										jQuery('button.search').addClass('cta');
+									});
+									jQuery('input[type=reset]').click(function() {
+										jQuery('button.search').removeClass('cta');
+										setTimeout(function() {
+											jQuery('#shows-filter').submit();			
+										}, 100);
+									})
+								})
+							</script>
 						</div>
 					</div>
 				</div>

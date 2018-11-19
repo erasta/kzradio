@@ -1,15 +1,16 @@
-<?php 
+<?php
 /**
  * Template Name: DJ
  */
 get_header(); ?>
 <?php
-$queried_object = get_queried_object(); 
+$queried_object = get_queried_object();
 $taxonomy = $queried_object->taxonomy;
-$term_id = $queried_object->term_id;  
+$term_id = $queried_object->term_id;
 $thumbnail_id = get_field('dj_photo', $taxonomy . '_' . $term_id);
 $thumbnail = wp_get_attachment_image_src( $thumbnail_id, 'full' );
-$thumbnail_position = get_field('dj_photo_position', $taxonomy . '_' . $term_id) ? get_field('dj_photo_position', $taxonomy . '_' . $term_id) : '0';
+$thumbnail_position = get_field('dj_photo_position', $taxonomy . '_' . $term_id);
+$backpos = $thumbnail_position ? ' background-position: 50% ' . $thumbnail_position . '%;' : '';
 
 $instagram = get_field('instagram', $taxonomy . '_' . $term_id);
 $spotify = get_field('spotify', $taxonomy . '_' . $term_id);
@@ -21,7 +22,7 @@ $email = get_field('email', $taxonomy . '_' . $term_id);
 <main id="dj-wrapper" class="page-taxonomy-dj">
 	<div class="row">
 		<div id="content">
-			<header id="dj-header" style="background-image: url('<?php echo $thumbnail[0]; ?>'); background-position: 50% <?php echo $thumbnail_position; ?>%;">
+			<header id="dj-header" style="background-image: url('<?php echo $thumbnail[0]; ?>');<?php echo $backpos; ?>">
 			</header>
 			<div class="flex-container dj-title-container">
 				<h1 class="dj-title"><?php echo single_cat_title(); ?></h1>
@@ -48,12 +49,12 @@ $email = get_field('email', $taxonomy . '_' . $term_id);
 					<?php } ?>
 					<?php if ($facebook) { ?>
 						<a href="<?php echo $facebook; ?>" target="_blank">
-							<img src="../../wp-content/themes/kzradio/theme/images/social/facebook_white.png" alt="facebook">		
+							<img src="../../wp-content/themes/kzradio/theme/images/social/facebook_white.png" alt="facebook">
 						</a>
 					<?php } ?>
 				</div>
 				<div class="on-demand-items container">
-					<?php get_template_part('loops/shows-loop'); ?>					
+					<?php get_template_part('loops/shows-loop'); ?>
 				</div>
 			</div>
 		</div><!-- /#content -->

@@ -1,6 +1,9 @@
 <script>
 
-	livestream="http://kzradio.livecast.co.il/kzradio_aac/";
+// 	livestream = "http://kzradio.livecast.co.il/kzradio_aac/";
+// livestream = "http://kpub.mediacast.co.il:8000/stream";
+livestream = "http://kzradio.mediacast.co.il/kzradio_live/kzradio/icecast.audio";
+//  livestream = "<?php the_field( 'streaming_url', 'option'); ?>";
 
 
 
@@ -115,14 +118,13 @@ function playerInit($) {
 			},
 		 	error: function(event)
 			{
-				logdebug("player error event");
-				logdebug(JSON.stringify(event));
+				console.log(new Date().toLocaleString(), "player error event", event);
 
 				//if(ready && event.jPlayer.error.type === $.jPlayer.error.URL_NOT_SET)
 				if (is_playing)
 				{
 					// Setup the media stream again and play it.
-	                jQuery("#jquery_jplayer_1").jPlayer("play");
+// 	                jQuery("#jquery_jplayer_1").jPlayer("play");
 				}
 		    },
 			swfPath: "/js",

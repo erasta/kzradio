@@ -11,7 +11,8 @@ get_header();
 		<div id="content" class="home" role="main">
 			<div id="wrapper-home">
 				<?php
-				// echo 'start-> ' . date('m/d/Y h:i:s a', time());
+                // echo 'start-> ' . date('m/d/Y h:i:s a', time());
+                $im_on_home_page = true;
 				get_curr_shows();
 				// echo 'stop-> ' . date('m/d/Y h:i:s a', time());
 				?>
@@ -42,11 +43,11 @@ get_header();
 							?>
 								<li class="item <?php echo $dj_img_small_id; ?>">
 									<a href="<?php echo esc_url($dj_link); ?>">
-										<?php 
+										<?php
 											if( $dj_img_small_id )
 												echo $dj_img_small;
 											else
-												echo $dj_img; 
+												echo $dj_img;
 										?>
 										<span class="dj-name"><?php echo $dj->name; ?></span>
 									</a>

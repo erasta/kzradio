@@ -23,18 +23,19 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php wp_head(); ?>
-	<link type="text/css" href="/css/jplayer/blue.monday/css/jplayer.blue.monday.css?reload2" rel="stylesheet" />
-	<script type="text/javascript" src="/js/jquery.jplayer.min.js"></script>
+		<link type="text/css" href="/css/jplayer/blue.monday/css/jplayer.blue.monday.css?reload2" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700,900" rel="stylesheet">
+		<script type="text/javascript" src="/js/jquery.jplayer.min.js"></script>
+		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/theme/js/app.js"></script>
 
-<!-- 	<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/style.css" type="text/css" media="screen" /> -->
+		<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/style.css" type="text/css" media="screen" />
 
 <?php include_once('player-header.js'); ?>
-<?php include_once('template-parts/schedule.php'); ?>
 <?php include_once('animation.js'); ?>
 
-	
 </head>
 <body <?php body_class(); ?>>
+
 <div class="container-fluid bg-dark" style="padding: 0;">
 	<div class="row " id="header">
 		<nav class="navbar navbar-expand-md navbar-dark" id="kzNav">
@@ -49,7 +50,7 @@
 					<img class="donate-image" src="<?php the_field('donate_image', 'options'); ?>"/>
 				</a>
 			</div>
-			
+
 			<div class="header-main">
 				<?php $logo = get_field('logo', 'options'); ?>
 				<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,9 +62,9 @@
 						<img id="logo-img" src="<?php echo $logo['sizes']['large']; ?>" class="logo" alt="<?php echo $logo['alt']; ?>" />
 					</a>
 				</div>
-				
+
 				<div class="ml-auto" id="navbarDropdown">
-					
+
 					<?php
 						wp_nav_menu( array(
 							'theme_location'	=> 'navbar',
@@ -77,7 +78,7 @@
 					?>
 				</div>
 			</div>
-			
+
 			<div class="powered">
 				<div class="powered-label">Powered by</div>
 				<a href="https://www.bpm-music.com/" class="social-icon" target="_blank">

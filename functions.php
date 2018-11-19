@@ -226,3 +226,20 @@ function cc_mime_types($mimes) {
   return $mimes;
 }
 add_filter('upload_mimes', 'cc_mime_types');
+
+
+// define the wpseo_opengraph_image callback 
+/*function filter_wpseo_opengraph_image( $img ) { 
+    if( get_post_type() == 'show' ) {
+		$queried_object = get_queried_object();
+		$taxonomy = $queried_object->taxonomy;
+		$term_id = $queried_object->term_id;
+		$thumbnail_id = get_field('show_image', $taxonomy . '_' . $term_id);
+		$thumbnail = wp_get_attachment_image_src($thumbnail_id ,'full')[0];
+		$img = $thumbnail;
+	}
+    return $img; 
+};*/ 
+         
+// add the filter 
+//add_filter( 'wpseo_opengraph_image', 'filter_wpseo_opengraph_image', 10, 1 ); 
