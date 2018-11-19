@@ -122,5 +122,5 @@ function shows_filter_function(){
 }
 
 
-add_action('wp_ajax_showsfilter', 'shows_filter_function');
-add_action('wp_ajax_nopriv_showsfilter', 'shows_filter_function');
+//add_action('wp_ajax_showsfilter', 'shows_filter_function');
+//add_action('wp_ajax_nopriv_showsfilter', 'shows_filter_function');

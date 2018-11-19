@@ -4,7 +4,7 @@
 
 
 
-function loadmp3(mp3file,title)
+function loadmp3(mp3file,title,image)
 {
 	logdebug("loadmp3 "+mp3file);
 	jQuery("#jquery_jplayer_1").jPlayer("clearmedia");
@@ -19,16 +19,20 @@ function loadmp3(mp3file,title)
 	document.getElementById("jp-duration-live").style.display = "none";
 	document.getElementById("jp-duration").style.display = "block";
 	document.getElementById("jp-ball").style.display = "block";
+    document.getElementById('player_image_div').style.backgroundImage="url("+image+")";
+
 }
 
-function player_backtolive()
+function player_backtolive(image,title)
 {
 	logdebug("load live stream "+livestream);
 	jQuery("#jquery_jplayer_1").jPlayer("clearmedia");
 	jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: livestream});
 	jQuery("#jquery_jplayer_1").jPlayer("play");
+	jQuery('#jplayer_title').text("שידור חי: "+title);
+    document.getElementById('player_image_div').style.backgroundImage="url("+image+")";
 
-	findCurrShow();
+	// findCurrShow();
 }
 
 

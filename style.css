@@ -17,6 +17,42 @@
 	/*font-weight: 400;*/
 }
 
+@font-face {
+    font-family: 'Rubik';
+    src: url('theme/fonts/Rubik-Medium.woff2') format('woff2'),
+        url('theme/fonts/Rubik-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Rubik';
+    src: url('theme/fonts/Rubik-Bold.woff2') format('woff2'),
+        url('theme/fonts/Rubik-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Rubik';
+    src: url('theme/fonts/Rubik-Regular.woff2') format('woff2'),
+        url('theme/fonts/Rubik-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Rubik';
+    src: url('theme/fonts/Rubik-Black.woff2') format('woff2'),
+        url('theme/fonts/Rubik-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+
+body {
+	background: #000000;
+	color: #ffffff;
+	font-family: Rubik, arial, sans-serif;
+}
+
 .center-bg {
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -41,6 +77,7 @@
 
 
 /* Search Modal */
+/* ==============================================*/
 .modal-dialog {
 	max-width: 600px;
 	font-size: 32px;
@@ -63,6 +100,18 @@
 	float: left;
 }
 
+/* Header and Footer */
+/* ==============================================*/
+
+#header li.menu-item a {
+	color: white;
+	padding: 4px;
+	transition: all .2s ease-in-out;
+}
+#header li.menu-item a:hover {
+	background-color: #FF2F3B;
+}
+
 
 /* Footer styles - added 15.8 */
 
@@ -76,7 +125,6 @@ footer {
 .footer-credits {
 	-webkit-display: flex;
 	display: flex;
-	align-items: center;
 	justify-content: center;
 }
 
@@ -105,6 +153,10 @@ footer {
 
 .icons-container img {
     height: 45px;
+}
+
+.social .icons-container img {
+    height: 32px;
 }
 
 /* Footer styles - end */
@@ -151,7 +203,7 @@ footer {
 	padding-top: 12px;
 	padding-bottom: 0px;
 	padding-right: 0px;
-		font-family: Henri, sans-serif;
+		font-family: Henri, arial, sans-serif;
 	padding-left: 0px;
 	position: fixed;
 		bottom: 0;
@@ -217,7 +269,7 @@ footer {
 	padding-bottom: 0px;
 	padding-right: 0px;
 	padding-left: 0px;
-		font-family: Henri, sans-serif;
+		font-family: Henri, arial, sans-serif;
 	position: fixed;
 		bottom: 0;
 		left: 0;
@@ -259,18 +311,37 @@ footer {
 /* SHOWS */
 .shows-wrapper {
 	background-color: black;
-	background-position: center center;
+	background-position: /*center center;*/ top center;
 	background-repeat: repeat-y;
 	background-size: cover;
+	padding-bottom: 100px;
 }
 h1.shows-main-title {
-	font-family: Rubik;
+	font-family: Rubik, arial, sans-serif;
 	font-size: 64px;
 	font-weight: bold;
 	text-align: center;
-	color: #ffffff;
+	color: /*#ffffff;*/ #1b1d1c;
 	width: 100%;
-	padding: 100px 0 100px;
+	margin-top: 4rem;
+	margin-bottom: 6px;
+	padding: 0px;
+}
+.shows-wrapper .shows-subtitle {
+	font-family: Rubik, arial, sans-serif;
+	font-size: 24px;
+	font-weight: normal;
+	text-align: center;
+	color: /*#ffffff;*/ #1b1d1c;
+	margin-bottom: 80px;
+}
+@media only screen and (max-width: 600px) {
+	h1.shows-main-title {
+		margin-top: 2rem;
+	}
+	.shows-wrapper .shows-subtitle {
+		margin-bottom: 40px;
+	}
 }
 .text-row {
 	display: flex;
@@ -290,7 +361,7 @@ input, select {
 input[name=free_search] {
 	max-width: 375px;
 	width: 100%;
-	font-family: Rubik;
+	font-family: Rubik, arial, sans-serif;
 	font-size: 16px;
 	font-weight: 500;
 	color: #ffffff;
@@ -311,29 +382,65 @@ input[name=free_search] {
 ::-ms-input-placeholder {
     color: white;
 }
+.select-row {
+	margin-bottom: 2rem;
+}
 .select-row select {
 	width: 250px;
 	height: 50px;
 	background-color: #ef303b;
 	border: solid 3px #ffffff;
-	color: white;
+	color: #ffffff;
 	outline: none;
+}
+.shows-wrapper .select-row select {
+	background-color: #1b1d1c;
+	border: 2px solid #ffffff;
+	border-radius: 0;
+    padding: 0 10px;
+	margin: 0 auto;
+	height: 50px !important; /* override forms.scss */
+}
+.shows-wrapper .select-row select option {
+    color: #ffffff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    padding: 4px;
+}
+.shows-wrapper .select-row select option:focus,
+.shows-wrapper .select-row select option:active {
+    background: linear-gradient(#ffffff, #fefefe);
+}
+.shows-wrapper .buttons-wrapper {
+	margin-top: 12px;
 }
 button {
 	width: 150px;
 	height: 50px;
 	background-color: #ef303b;
-	border: solid 3px #ffffff;
+	border: solid 2px #ffffff;
 	color: white;
 	outline: none;	
+	cursor: pointer;
 }
 input[type=reset] {
 	background-color: white;
 	color: #ef303b;
-	border: 3px solid #ef303b;
+	border: 2px solid #ef303b;
 	width: 100px;
 	height: 50px;
 }
+.shows-wrapper .buttons-wrapper input[type=reset] {
+	background-color: transparent;
+	color: #1b1d1c;
+	border: none;
+	width: auto;
+	height: auto;
+	margin-right:0;
+	margin-bottom: 40px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 #response {
 	padding: 1rem 0;
 }
@@ -341,7 +448,6 @@ input[type=reset] {
 	text-align: center;
 	font-size: 16px;
 }
-
 
 .on-demand-items {
     max-width: 782px;
@@ -356,6 +462,18 @@ input[type=reset] {
     box-sizing: border-box;
     border: 6px solid #000;
 }
+.shows-list .od-item {
+	max-width: 782px;
+	margin: 0 auto 16px;
+}
+/*.od-item .dj-overlay {
+	position: absolute;
+    top: 0;
+    left: 0;
+	right: 0;
+	bottom: 0;
+	mix-blend-mode: multiply;
+}*/
 .od-item .show-link {
 	position: absolute;
 	top: 0;
@@ -379,14 +497,14 @@ input[type=reset] {
     font-weight: 700;
 }
 .od-details .od-title {
-    font-family: Rubik;
+    font-family: Rubik, arial, sans-serif;
     font-size: 20px;
     font-weight: bold;
 }
 .od-details .od-show-dj {
     min-width: 96px;
     box-sizing: border-box;
-    font-family: Henri, sans-serif;
+    font-family: Henri, arial, sans-serif;
     font-size: 16px;
     font-weight: 700;
     text-align:center;
@@ -473,7 +591,7 @@ input[type=reset] {
 	position: absolute;
 	right: 0.5rem;
 	top: 0.5rem;
-	font-family: Rubik;
+	font-family: Rubik, arial, sans-serif;
 	font-size: 10px;
 	font-weight: 500;
 }
@@ -485,7 +603,7 @@ input[type=reset] {
 	position: absolute;
 }
 .results .show-title {
-	font-family: Rubik;
+	font-family: Rubik, arial, sans-serif;
   	font-size: 40px;
 	font-weight: 900;
 	bottom: 0;
@@ -494,7 +612,7 @@ input[type=reset] {
 	margin-bottom: 0;
 }
 .results .chapter-title {
-	font-family: Rubik;
+	font-family: Rubik, arial, sans-serif;
     font-size: 20px;
 	font-weight: bold;
     position: absolute;
@@ -540,72 +658,136 @@ input[type=reset] {
 	100% { background-color: #B20000; box-shadow: 0 0 3px #B20000; }
 }
 
-/* single chapter css - start */
+/* Single Show - Episode */
 /* ==============================================*/
-.single-show-container {
-	background: black;
-	color: white;
+.single-show {}
+.episode-container {
+	background-color: #000000; /*fallback*/
+	background-image: url('theme/images/episode-bg.jpg');
+	background-repeat: repeat-y; 
+	background-size: 100% auto;	
+	color: #ffffff;
+	/*border: 6px solid #000000;*/
 }
-#show-header {
+#episode-header {
 	position: relative;
+	background-color: #000000;
+	background-position: center;
+	background-size: cover;
+	height: 400px;
+	border-bottom: 6px solid #000000;
 }
-#show-header #show-meta {
+#episode-header #episode-meta {
 	font-family: Rubik, arial, sans-serif;
-	max-width: 600px;
+	/*max-width: 600px;*/
 	position: absolute;
-	background: black;
-	left: 50%;
+	/*background: #000000;*/
+	right: 0;
 	bottom: 0;
 	width: 100%;
 	z-index: 10;
-	transform: translate(-50%, 75%);
-	text-align: center;
+	/*transform: translate(-50%, 75%);*/
+	text-align: right;
 }
-#show-header #show-meta h1 {
-	font-size: 54px;
+#episode-header #episode-meta h1.episode-show-title {
+	font-size: 72px;
+	font-family: Rubik, arial, sans-serif;
 	font-weight: 900;
-	text-align: center;
+	text-align: right;
+	line-height: normal;
+	margin: 0;
+	padding: 0;
+}
+#episode-header #episode-meta h1.episode-show-title span {}
+#episode-header #episode-meta h2.episode-title {
+	font-size: 46px;
+	font-weight: 900;
+	font-family: Rubik, arial, sans-serif;
+	text-align: right;
 	color: #ffffff;
+	margin: 0;
+	padding: 0;
 }
-#show-header #show-meta h2 {
-	font-size: 32px;
-	font-weight: 400;
+#episode-header #episode-meta h2.episode-title span {
+	padding: 0 12px 6px 16px;
 }
-#show-header #show-meta h2 a{}
-#show-header #show-meta h2 a:hover {
+#episode-header #episode-meta .episode-dj-title {
+	font-family: Henri, arial, sans-serif;
+    line-height: normal;
+    font-weight: 400;
+	font-size: 30px;
+	padding: 0;
+}
+
+#episode-header #episode-meta h1.episode-show-title span,
+#episode-header #episode-meta h2.episode-title span,
+#episode-header #episode-meta .episode-dj-title span {
+	background: #000000;
+}
+#episode-header #episode-meta a {
+	padding: 0 9px 0 12px;
+}
+#episode-header #episode-meta a:hover {
 	background: #ffffff;
 	color: #000000;
 	text-decoration: none;
 }
-.single-show-container .show-content {
+.episode-container .episode-content {
 	max-width: 600px;
-	margin: 8rem auto;
-	padding: 0.5rem 0;
+	margin: 1rem auto;
+	padding: 1rem 0;
+	text-align: center;
+	font-family: henri, arial, sans-serif;
+}
+.episode-container .episode-content .episode-date {}
+
+.episode-container .episode-content .show-tag {
+	text-decoration: none;
+	background: #1b1d1c;
+	display: inline-block;
+	margin-bottom: 6px;
+}
+.episode-container .episode-content .show-tag:hover {
+	text-decoration: none;
+	background: #ffffff;
+	color: #000000;
 }
 .play-show {
-	margin: 2.5rem auto 3rem;
-	width: 64px;
+	margin: 1rem auto;
+	width: 96px;
 	display: block;
 	cursor: pointer;
 }
 .play-show img {
-	height: 64px;
-	width: 64px;
+	height: 96px;
+	width: 96px;
 }
-.single-show-container .show-tags {
-	margin: 2rem 0 4rem;
+.episode-container .show-tags {
+	margin: 2rem 0;
 	text-align: center;
 }
-.playlist p {
+.episode-container .episode-content .episode-playlist {
+	margin-bottom: 2rem;
+}
+.episode-container .episode-content .playlist {
+	direction: ltr;
+	margin-bottom: 80px;
+}
+.episode-container .episode-content .no-playlist {
+	direction: rtl;
+}
+.episode-container .episode-content .playlist p {
 	padding: 10px 1rem;
-	font-family: Henri;
+	font-family: Henri, arial, sans-serif;
 	font-size: 17px;
 	text-align: center;
 	color: #ffffff;
 	margin: 0 auto 10px;
 	border: 1px solid #fff;
+	background: #000000;
 }
-/* single chapter css - end */
+
+/* Single Show Episode - end */
 
 
 /* ALL DJs */
@@ -624,6 +806,9 @@ input[type=reset] {
 .all-djs-wrapper h1 {
 	margin-top: 4rem;
 	font-family: Rubik, arial, sans-serif;
+	font-size: 64px;
+	font-weight: bold;
+	text-align: center;
 }
 
 .all-djs-wrapper .broadcasters {
@@ -691,10 +876,19 @@ body.page-template-page-schedule #main {
 	background: url(theme/images/schedule-bg.jpg) no-repeat top center;
 	background-size: cover;
 }
+#wrapper-schedule {}
 #wrapper-schedule .kz-title {
+	/*margin-top: 4rem;*/
+	font-family: Rubik, arial, sans-serif;
+	font-size: 64px;
+	font-weight: bold;
 	text-align: center;
-	font-weight: 700;
-	color: #fff;
+}
+#wrapper-schedule h2.schedule-content {
+	font-family: Henri, arial, sans-serif;
+	font-size: 32px;
+	font-weight: bold;
+	text-align: center;
 }
 #wrapper-schedule .filters li {
 	display: inline-block;
@@ -813,7 +1007,7 @@ body.page-template-page-support-us #main {
 #wrapper-support .banner {
 	min-height: 242px;
 	padding: 34px 42px 20px;
-	font-family: Henri, serif;
+	font-family: Henri, arial, sans-serif;
 	border: 6px solid #000;
 	background-size: cover;
 }
@@ -837,7 +1031,7 @@ body.page-template-page-support-us #main {
 	min-height: 100px;
 }
 #wrapper-support .banner .textual-content .banner-title {
-	font-family: Rubik, sans-serif;
+	font-family: Rubik, arial, sans-serif;
 	font-weight: 700;
 }
 #wrapper-support .banner .btn-wrapper {
@@ -848,7 +1042,7 @@ body.page-template-page-support-us #main {
 	display: inline-block;
 }
 #wrapper-support .banner:first-child + .banner + .banner .btn-wrapper {
-	font-family: rubik, sans-serif;
+	font-family: rubik, arial, sans-serif;
 }
 #wrapper-support .banner:first-child + .banner + .banner .btn-wrapper a {
 	display: inline-block;
@@ -861,7 +1055,7 @@ body.page-template-page-support-us #main {
 
 @media (max-width: 767px) {
 	h1.shows-main-title {
-		padding: 50px 0 30px;
+		padding: 50px 0 0px;/*50px 0 30px;*/
 		font-size: 38px;
 	}
 	#shows-filter .select-row .col-sm-12 {
@@ -910,6 +1104,9 @@ body.page-template-page-support-us #main {
 		height: auto;
 	}
 	
+	#wrapper-schedule .schedule-table {
+		position: relative;
+	}
 	#wrapper-schedule .schedule-table .day-column {
 		position: absolute;
 		top: 0;
@@ -924,6 +1121,14 @@ body.page-template-page-support-us #main {
 	}
 	#wrapper-schedule .schedule-table .day-column .show-box {
 		height: 80px !important;
+	}
+	
+	.no-shows-msg {
+		max-width: 100%;
+	}
+	
+	.footer-credits .title {
+		font-size: 16px;
 	}
 }
 /* Support Us - end */
@@ -942,9 +1147,14 @@ body.page-template-page-support-us #main {
 	color: #ffffff; 
 	padding-bottom: 100px;
 }
+.about-wrapper .container {
+	max-width: 800px;
+}
 .about-wrapper h1 {
 	margin-top: 4rem;
 	font-family: Rubik, arial, sans-serif;
+	font-size: 64px;
+	font-weight: bold;
 }
 .about-wrapper h2 {
 	background-color: rgba(200,200,200,0.3);
@@ -1011,6 +1221,8 @@ a.about-anchor:active {
 .contact-us-wrapper h1 {
 	margin-top: 4rem;
 	font-family: Rubik, arial, sans-serif;
+	font-size: 64px;
+	font-weight: bold;
 }
 .contact-us-wrapper h2 {
 	background-color: rgba(200,200,200,0.3);
@@ -1034,7 +1246,7 @@ a.about-anchor:active {
 
 #contact_details {
 	margin-top: 2rem;
-	font-size: 28px; 
+	font-size: 20px; 
 	font-family: Rubik, arial, sans-serif;
 }
 
@@ -1045,7 +1257,7 @@ a.about-anchor:active {
 
 #contact_sendmusic .FAQ {
 	font-weight: bold;
-	/*font-family: henry, arial;*/
+	/*font-family: henri, arial, sans-serif; */
 	margin-top: 40px;
 	border-top: 1px dotted #aaaaaa;
 	padding: 6px 0;
@@ -1058,7 +1270,7 @@ a.about-anchor:active {
 /* ==============================================*/
 .page-404 {
 	background-color: #000000; /* fallback */
-    background-image: url('http://beta.kzradio.net/wp-content/uploads/2018/11/404-bg.jpg');
+    background-image: url('../../../wp-content/uploads/2018/11/404-bg.jpg');
 	background-repeat: no-repeat; 
 	background-size: 100% auto;
 	color: #ffffff; 
@@ -1087,7 +1299,7 @@ a.about-anchor:active {
 /* ==============================================*/
 .single-post {
 	background-color: #000000; /*fallback*/
-	background-image: url('http://beta.kzradio.net/wp-content/uploads/2018/11/blog-post-bg.jpg');
+	background-image: url('../../../wp-content/uploads/2018/11/blog-post-bg.jpg');
 	background-repeat: repeat-y; 
 	background-size: 100% auto;	
 	color: #ffffff;
@@ -1101,7 +1313,7 @@ a.about-anchor:active {
 }
 .single-post-container header {
 	background-color: #000000;
-	background-image: url('http://beta.kzradio.net/wp-content/uploads/2018/11/pexels-photo-744318.jpeg'); /* will be overriden by thumbnail */
+	background-image: url('../../../wp-content/uploads/2018/11/pexels-photo-744318.jpeg'); /* will be overriden by thumbnail */
 	background-repeat: no-repeat;
 	background-position: center 40%;
 	background-size: cover;
@@ -1126,7 +1338,7 @@ a.about-anchor:active {
 	text-align: center;
 }
 .single-post-container header .blog-post-titles h1 {
-	font-family: rubik, sans-serif;
+	font-family: rubik, arial, sans-serif;
 	font-size: 54px;
 	font-weight: 900;
 	text-align: center;
@@ -1134,7 +1346,7 @@ a.about-anchor:active {
 }
 
 .single-post-container header .blog-post-titles h2 {
-	font-family: rubik, sans-serif;
+	font-family: rubik, arial, sans-serif;
 	font-size: 24px;
 	font-weight: 400;
 }

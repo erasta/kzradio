@@ -30,7 +30,7 @@ get_header();
 								</p>
 							</div>
 							<div class="btn-wrapper">
-								<a href="<?php the_field( 'button_url1' ); ?>" class="banner-btn">
+								<a href="<?php the_field( 'button_url1' ); ?>" target="_blank" class="banner-btn">
 									<img src="<?php bloginfo('template_url'); ?>/theme/images/become-a-patron-button.png" alt="Become a Patron">
 								</a>
 							</div>
@@ -42,7 +42,7 @@ get_header();
 								<p><?php the_field( 'text2' ); ?></p>
 							</div>
 							<div class="btn-wrapper">
-								<a href="<?php the_field( 'button_url2' ); ?>" class="banner-btn">
+								<a href="<?php the_field( 'button_url2' ); ?>" target="_blank" class="banner-btn">
 									<img src="<?php bloginfo('template_url'); ?>/theme/images/paypal.jpg" alt="Check out with PayPal">
 								</a>
 							</div>
@@ -54,7 +54,7 @@ get_header();
 								<p><?php the_field( 'text3' ); ?></p>
 							</div>
 							<div class="btn-wrapper textual">
-								<a href="<?php the_field( 'button_url3' ); ?>" class="banner-btn">
+								<a href="<?php the_field( 'button_url3' ); ?>" target="_blank" class="banner-btn">
 									<?php the_field( 'button_label3' ); ?>
 								</a>
 							</div>

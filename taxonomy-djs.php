@@ -9,7 +9,8 @@ $taxonomy = $queried_object->taxonomy;
 $term_id = $queried_object->term_id;  
 $thumbnail_id = get_field('dj_photo', $taxonomy . '_' . $term_id);
 $thumbnail = wp_get_attachment_image_src( $thumbnail_id, 'full' );
-//var_dump($thumbnail);
+$thumbnail_position = get_field('dj_photo_position', $taxonomy . '_' . $term_id) ? get_field('dj_photo_position', $taxonomy . '_' . $term_id) : '0';
+
 $instagram = get_field('instagram', $taxonomy . '_' . $term_id);
 $spotify = get_field('spotify', $taxonomy . '_' . $term_id);
 $twitter = get_field('twitter', $taxonomy . '_' . $term_id);
@@ -20,7 +21,7 @@ $email = get_field('email', $taxonomy . '_' . $term_id);
 <main id="dj-wrapper" class="page-taxonomy-dj">
 	<div class="row">
 		<div id="content">
-			<header id="dj-header" style="background-image: url('<?php echo $thumbnail[0]; ?>');">
+			<header id="dj-header" style="background-image: url('<?php echo $thumbnail[0]; ?>'); background-position: 50% <?php echo $thumbnail_position; ?>%;">
 			</header>
 			<div class="flex-container dj-title-container">
 				<h1 class="dj-title"><?php echo single_cat_title(); ?></h1>

@@ -9,10 +9,10 @@ if (has_post_thumbnail()){
     $thumbnail_id = get_field('show_image', 'shows_'.$shows_term['0']->term_id);
 	$thumbnail = wp_get_attachment_image_src($thumbnail_id ,'full')[0];
 }?>
-
     <div class="od-item center-bg" style="background-image: url('<?php echo $thumbnail; ?>');" id="post_<?php the_ID()?>">
+		<div class="dj-overlay" style="background-color: <?php echo '#'.get_field( 'colour', $djs_term[0]); ?>"></div>
 		<a href="<?php the_permalink(); ?>" class="show-link"></a>
-		<span class="data od-show-time"><span class="show-date"><?php echo get_the_date('j.n.Y // H:m'); ?></span></span>
+		<span class="data od-show-time"><span class="show-date"><?php echo get_the_date('j.n.Y'); ?></span></span>
         <div class="od-details">
             <?php foreach ($djs_term as $term) { ?>
                 <a href="<?php echo get_term_link( $term ) ?>" class="data od-show-dj"><?php echo $term->name; ?></a>
@@ -33,7 +33,7 @@ if (has_post_thumbnail()){
 						$title = get_the_title(); 
 						$p_title = str_replace("'", "", $title); ?>
 
-							<span class="play" role="button" tabindex="0" onclick="javascript:loadmp3('<?php echo $s_link; ?>','<?php echo $p_title; ?>')">
+							<span class="play" role="button" tabindex="0" onclick="javascript:loadmp3('<?php echo $s_link; ?>','<?php echo $p_title; ?>', '<?php echo $thumbnail; ?>')">
 								<img src="<?php echo get_template_directory_uri(); ?>/theme/images/play.svg" alt="Play">
 							</span>
 				<?php endif; ?>
@@ -44,10 +44,11 @@ if (has_post_thumbnail()){
             <?php
                 if ($tags):
                     foreach ($tags as $key => $value) { ?>
-                        <!--<a class="data tag" href="/tag/<?php // echo $value -> slug ?>">-->
-						<a class="data tag" href="#">
-                        <?php echo $value -> name; ?>
-                        </a>
+                        <div style="display: none;"><?php var_dump($value); ?></div>
+						
+						<span class="data tag">
+							<?php echo $value -> name; ?>
+                        </span>
                     <?php
                     }
                 endif;

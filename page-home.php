@@ -11,7 +11,9 @@ get_header();
 		<div id="content" class="home" role="main">
 			<div id="wrapper-home">
 				<?php
-				echo get_curr_shows();
+				// echo 'start-> ' . date('m/d/Y h:i:s a', time());
+				get_curr_shows();
+				// echo 'stop-> ' . date('m/d/Y h:i:s a', time());
 				?>
 
 				<div class="kz-title full-schedule-link">
@@ -34,13 +36,18 @@ get_header();
 							<?php foreach ( $djs as $dj ) {
 								$dj_link = get_term_link($dj);
 								$dj_img_id = get_field('dj_photo', $dj);
-								$dj_img = wp_get_attachment_image( $dj_img_id, 'dj_img', '', array( 'alt'=>'test' ) );
+								$dj_img_small_id = get_field('dj_photo_small', $dj);
+								$dj_img_small = wp_get_attachment_image( $dj_img_small_id, 'dj_img', '', array( 'alt'=>$dj->name ) );
+								$dj_img = wp_get_attachment_image( $dj_img_id, 'dj_img', '', array( 'alt'=>$dj->name ) );
 							?>
-								<li class="item">
-									<?php $dj_colour = get_field( 'colour', $dj ) ? '#'.get_field( 'colour', $dj ) : 'transparent';?>
+								<li class="item <?php echo $dj_img_small_id; ?>">
 									<a href="<?php echo esc_url($dj_link); ?>">
-										<?php echo $dj_img; ?>
-										<span class="dj-overlay" style="background: <?php echo $dj_colour; ?>"></span>
+										<?php 
+											if( $dj_img_small_id )
+												echo $dj_img_small;
+											else
+												echo $dj_img; 
+										?>
 										<span class="dj-name"><?php echo $dj->name; ?></span>
 									</a>
 								</li>
@@ -87,7 +94,8 @@ get_header();
 							<p class="desc">
 								הרשמו לניוזלטר שלנו ותקבלו עדכונים על תכניות, ספיישלים, אירועים ועוד. בלי ספאם. מבטיחים.
 							</p>
-							<?php echo do_shortcode( '[mc4wp_form id="312"]' ); ?>
+							<?php //echo do_shortcode( '[mc4wp_form id="312"]' ); ?>
+							<p><a href="https://us7.list-manage.com/subscribe?u=cd5550d0b8eebbade6b90ac64&id=4f2e5346ab&fbclid=IwAR0RTfX_l0Z11bbyrY-7TfYcIzfoBLAGu5iXku2AOKC7juo8zhhqzt3KJps" target="_blank" class="cta-btn">להרשמה</a>
 						</div>
 						<div class="ways-to-listen">
 							<h3 class="kz-subtitle"><?php the_field( 'streaming_title' ); ?></h3>

@@ -20,7 +20,6 @@ function header_scripts() {
 	wp_enqueue_style('home', get_template_directory_uri() . '/style-home.css', false);
 	wp_enqueue_style('basic', get_template_directory_uri() . '/theme/css/basic.css', false);
 	wp_enqueue_style('css1', get_template_directory_uri() . '/theme/css/css1.css', false);
-	wp_enqueue_style('css2', get_template_directory_uri() . '/theme/css/css2.css', false);
 }
 add_action('wp_enqueue_scripts', 'header_scripts', 100);
 add_image_size( 'dj_img', 240, 240, true );
@@ -45,8 +44,6 @@ if( function_exists('acf_add_options_page') ) {
 		'redirect'		=> false
 	));
 }
-
-wp_localize_script( 'kzradio', 'kzradio', array('ajaxurl' => admin_url( 'admin-ajax.php' )));
 
 
 /**
@@ -223,3 +220,9 @@ function custom_taxonomy() {
 }
 add_action( 'init', 'custom_taxonomy', 0 );
 
+
+function cc_mime_types($mimes) {
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');

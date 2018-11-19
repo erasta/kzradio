@@ -7,15 +7,26 @@
 		bloginfo('name'); echo " - "; bloginfo('description');
 	}
 	?>" />
+	<script>
+		if (window.location.hostname.indexOf("beta.kzradio.net") != -1) {
+			console.log("Beta dev site - no analytics.")
+		} else {
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-30034653-1', 'auto');
+			ga('send', 'pageview');
+		}
+	</script>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php wp_head(); ?>
-		<link type="text/css" href="/css/jplayer/blue.monday/css/jplayer.blue.monday.css?reload2" rel="stylesheet" />
-		<link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700,900" rel="stylesheet">
-		<script type="text/javascript" src="/js/jquery.jplayer.min.js"></script>
+	<link type="text/css" href="/css/jplayer/blue.monday/css/jplayer.blue.monday.css?reload2" rel="stylesheet" />
+	<script type="text/javascript" src="/js/jquery.jplayer.min.js"></script>
 
-		<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/style.css" type="text/css" media="screen" />
+<!-- 	<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/style.css" type="text/css" media="screen" /> -->
 
 <?php include_once('player-header.js'); ?>
 <?php include_once('template-parts/schedule.php'); ?>

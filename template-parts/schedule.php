@@ -12,7 +12,6 @@ function timeByString(t, s) {
 }
 
 function parseShows(data) {
-	console.log("parseShows");
 	shows = [];
 	var arr = data.split("\n").forEach(s => {
 		if (s.startsWith("day")) {
@@ -27,7 +26,7 @@ function parseShows(data) {
 			shows[shows.length - 1].times.push(obj);
 		}
 	});
-	console.log(shows);
+	console.log("parseShows: ", shows);
 }
 
 function setCurrShow(showObj, suffix) {
@@ -44,19 +43,6 @@ function setCurrShow(showObj, suffix) {
 			var isDjCurrNull = (elementName == "dj" && suffix == "curr" && value == "הקצה");
 			element.style.display = isDjCurrNull ? "none" : "";
 		}
-	}
-	var desc = assure("desc", "מוזיקת קצה שלא מפסיקה");
-	assure("image", defaultImage);
-	assure("image_full", defaultImage);
-	setField("image", "src", showObj[suffix == "curr" ? "image_full" : "image"]);
-	setField("image", "alt", desc);
-// 	setField("image", "title", desc);
-	setField("dj", "textContent", assure("dj", "הקצה"));
-	setField("name", "textContent", assure("show", "הקצה נונסטופ"));
-	setField("dj", "href", assure("linkdj", "#"));
-	setField("name", "href", assure("linkshow", "#"));
-	if (suffix != "curr") {
-		setField("start", "textContent", showObj.dayText + assure("start", ""));
 	}
 	if (suffix == "curr" && typeof player_update_live_show !== "undefined") {
 		if (!showObj.start) {
@@ -85,31 +71,26 @@ function setNextShows(currShowObj, fromNow) {
 	}
 }
 
-function showsForDay(daynum, fromTime, dayText) {
+function showsForDay(daynum, fromTime) {
 	var showsOfDay = shows.filter(function(s) {return s.daynum == daynum});
 	if (!showsOfDay || showsOfDay.length == 0) return [];
 	var times = showsOfDay[0].times;
 	var d = new Date();
-	times.forEach(function(tt) {
-		tt.startNum = timeByString(d, tt.start);
-		tt.endNum = timeByString(d, tt.end)
-	});
-	times.sort(function(a, b) { return a.startNum - b.endNum; });
+	times.sort(function(a, b) { return a.starthour - b.starthour; });
 	times = times.filter((t) => {return t.start;});
 	if (fromTime) {
-		times = times.filter(function(tt) {return fromTime < tt.endNum});
+		times = times.filter(function(tt) {return fromTime < timeByString(d, tt.end)});
 	}
-	times.forEach(tt => {tt.dayText = dayText});
 	return times;
 }
 
-function showPlayButtonOnHeadline(shouldShow) {
-	var e = document.getElementById("play-btn");
-	if (e) {
-		e.style.display = shouldShow ? "" : "none";
-// 		console.log("showPlayButtonOnHeadline=" + shouldShow);
-	}
-}
+// function showPlayButtonOnHeadline(shouldShow) {
+// 	var e = document.getElementById("play-btn");
+// 	if (e) {
+// 		e.style.display = shouldShow ? "" : "none";
+// // 		console.log("showPlayButtonOnHeadline=" + shouldShow);
+// 	}
+// }
 
 function changeActiveShowOnSchedule(showId) {
 	var elements = document.getElementsByClassName("show-box");
@@ -124,46 +105,66 @@ function changeActiveShowOnSchedule(showId) {
 	}
 }
 
+function updatePlayer(showObj) {
+	if (!showObj.start) {
+		var currHour = new Date().getHours();
+		showObj.start = currHour + ":00";
+		showObj.end = (currHour + 1) + ":00";
+	}
+	showObj.dj = showObj.dj || "הקצה";
+	showObj.show = showObj.show || "הקצה נונסטופ";
+	showObj.image = showObj.image || defaultImage;
+	player_update_live_show(showObj)
+}
+
 function findCurrShow() {
 	console.log("findCurrShow");
-// 	if (document.getElementById("show-image-curr") == null || document.getElementById("show-dj-curr") == null || document.getElementById("next-show-3") == null || document.getElementById("show-link-3") == null) {
-// 		setTimeout(findCurrShow, 10);
-// 		return;
-// 	}
+	var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
+
 	var d = new Date();
 	var nextCheck = new Date(d);
 	nextCheck.setMinutes(d.getMinutes() + 15);
 	var showsToday = showsForDay(d.getDay(), d, "");
 	var showsTomorrow = showsForDay((d.getDay() + 1) % 7, 0, "מחר ב-");
 	console.log("today", showsToday, "\ntomorrow", showsTomorrow);
-	if (showsToday.length == 0 || d < showsToday[0].startNum) {
-		setNextShows(null, showsToday.concat(showsTomorrow));
+	if (showsToday.length == 0 || d < timeByString(d, showsToday[0].start)) {
 		if (showsToday.length > 0) {
-			nextCheck = Math.min(nextCheck, showsToday[0].startNum);
+			nextCheck = Math.min(nextCheck, timeByString(d, showsToday[0].start));
 		}
-		showPlayButtonOnHeadline(false);
-		changeActiveShowOnSchedule("")
+		updatePlayer({});
 	} else {
-		setNextShows(showsToday[0], (showsToday.concat(showsTomorrow)).slice(1));
-		nextCheck = Math.min(nextCheck, showsToday[0].endNum);
+		nextCheck = Math.min(nextCheck, timeByString(d, showsToday[0].end));
 		if (showsToday.length > 1) {
-			nextCheck = Math.min(nextCheck, showsToday[1].startNum);
+			nextCheck = Math.min(nextCheck, timeByString(d, showsToday[1].start));
 		}
-		showPlayButtonOnHeadline(true);
-		changeActiveShowOnSchedule(shows.filter(function(s) {return s.daynum == d.getDay()})[0].day + "_" + showsToday[0].starthour);
+		updatePlayer(showsToday[0]);
 	}
 	var checkms = nextCheck - Date.now();
 	console.log('next check:', checkms, 'ms --- ', new Date(nextCheck));
-	setTimeout(findCurrShow, checkms);
 
-	var ajaxurl = '<?php echo admin_url('admin-ajax.php'); ?>';
-	jQuery.ajax({
-		url: ajaxurl,
-		type: "POST",
-		cache: false,
-		data: 'action=schedule',
-		success: parseShows
-	});
+	setTimeout(() => {
+		// Get curr shows banners from server
+		jQuery.ajax({
+			url: ajaxurl,
+			type: "POST",
+			cache: false,
+			data: 'action=html_curr_schedule',
+			success: (data) => {
+				data = data.substr(0, data.length - 1);
+				var splitter = data.split('<$&$/>');
+
+				jQuery('#shows-curr-and-next').replaceWith(splitter[0]);
+
+				// Get whole schedule from server (maybe delete later if no one uses shows varible)
+				parseShows(splitter[1]);
+			}
+		});
+
+		var dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+		changeActiveShowOnSchedule(dayNames[d.getDay()] + "_" + showsToday[0].starthour);
+
+		findCurrShow(); // run again
+	}, checkms);
 };
 
 var defaultImage = 'wp-content/uploads/2018/11/pexels-photo-744318.jpeg';

@@ -106,6 +106,10 @@ body, input, textarea {
 #wrapper-home .next-shows .next-show-item + .next-show-item {
 	border-right: solid 6px #000;
 }
+/*#wrapper-home .next-shows .next-show-item img {/* turn images to black and white */
+	/*-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+	/*filter: grayscale(100%);
+}*/
 #wrapper-home .next-shows .next-show-item img {
 	position: absolute;
 	top: 50%;
@@ -122,7 +126,7 @@ body, input, textarea {
 	bottom: 0;
 	z-index: 3;
 }
-#wrapper-home .next-shows .next-show-item .show-overlay {
+/*#wrapper-home .next-shows .next-show-item .show-overlay {
 	position: absolute;
     top: 0;
     left: 0;
@@ -130,7 +134,7 @@ body, input, textarea {
     width: 100%;
 	height: 100%;
     mix-blend-mode: multiply;
-}
+}*/
 #wrapper-home .next-shows .next-show-item .wrapper .blck-bg {
 	display: block;
 	color: #fff;
@@ -145,11 +149,11 @@ body, input, textarea {
 }
 #wrapper-home .next-shows .next-show-item .next-show-name {
 	padding: 4px 8px;
-	font-size: 60px;
+	font-size: 52px;
 	font-weight: 700;
 }
 #wrapper-home .next-shows .next-show-item .next-show-dj {
-	padding: 3px 12px;
+	padding: 3px 9px;
 	font-family: Henri, sans-serif;
 	font-size: 21px;
 }
@@ -185,9 +189,12 @@ body, input, textarea {
 	background: #75ffc0;
 	border-radius: 14px;
 	box-shadow: 4px 4px 1px 1px rgba(0,0,0,.8);
+	transition: all .2s ease-in-out;
 }
 #wrapper-home .full-schedule-link a:hover {
 	text-decoration: none;
+	background: #2a2a2a;
+	color: #75ffc0;
 }
 .broadcasters {
 	padding: 50px 0 30px;
@@ -216,6 +223,11 @@ body, input, textarea {
 	font-size: 16px;
 	font-weight: 500;
 	color: #fff;
+	transition: all .2s ease-in-out;
+	padding: 2px;
+}
+.broadcasters .all-djs-link:hover {
+	background-color: #FF2F3B;
 }
 .broadcasters .items {
 	-webkit-display: flex;
@@ -234,7 +246,7 @@ body, input, textarea {
 	display: block;
 	position: relative;
 }
-.broadcasters .items .item a .dj-overlay {
+/*.broadcasters .items .item a .dj-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -242,7 +254,11 @@ body, input, textarea {
 	height: 120px;
 	border-radius: 50%;
     mix-blend-mode: multiply;
-}
+}*/
+/*#wrapper-home .broadcasters .items .item a img {/* turn images to black and white */
+	/*-webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+	/*filter: grayscale(100%);
+}*/
 .broadcasters .items .item a img {
 	display: block;
 	width: 120px;
@@ -277,6 +293,10 @@ body, input, textarea {
 #wrapper-home .on-demand-and-video .kz-title {
 	margin-bottom: 27px;
 	text-align: center;
+	color: #1b1d1c;
+}
+#wrapper-home .on-demand-and-video .kz-video .kz-title {
+	color: #fff;
 }
 #wrapper-home .on-demand-and-video .want-more {
 	margin-top: 18px;
@@ -303,6 +323,11 @@ body, input, textarea {
 }
 #wrapper-home .on-demand-and-video .kz-video .hold-on a {
 	text-decoration: underline;
+	transition: all .2s ease-in-out;
+	padding: 2px;
+}
+#wrapper-home .on-demand-and-video .kz-video .hold-on a:hover {
+	background-color: #FF2F3B;
 }
 
 #ctas-strip {
@@ -389,7 +414,8 @@ body, input, textarea {
 	border-radius: 8px;
 }
 #ctas-strip .atem {
-	/* width: 960px; */
+	width: 960px;
+	max-width: 100%;
 	margin: 52px auto;
 	padding: 10px 76px 30px;
 	background: url(theme/images/bg-atem.jpg) no-repeat center;
@@ -434,7 +460,7 @@ body, input, textarea {
 	margin-bottom: 24px;
 	line-height: 1.6;
 }
-#ctas-strip .atem .textual-area .cta-btn {
+#ctas-strip .atem .textual-area .cta-btn, #ctas-strip .apps-and-form .form-wrapper .cta-btn {
 	display: inline-block;
 	max-width: 210px;
 	height: 48px;
@@ -445,7 +471,14 @@ body, input, textarea {
 	color: #000;
 	border-radius: 8px;
 	background: #82ffe2;
+	transition: all .2s ease-in-out;
 }
+#ctas-strip .atem .textual-area .cta-btn:hover, #ctas-strip .apps-and-form .form-wrapper .cta-btn:hover {
+	background: #000;
+	color: #82ffe2;
+	text-decoration: none;
+}
+
 
 
 @media all and (max-width: 767px) {
@@ -456,8 +489,11 @@ body, input, textarea {
 		white-space: nowrap;
 		text-overflow: ellipsis;
 		max-width: calc(100% - 50px);
-		font-size: 55px;
+		font-size: 48px;
 		overflow: hidden;
+	}
+	#wrapper-home .main-banner .show-details .dj-name {
+		font-size: 34px
 	}
 	#wrapper-home .main-banner .show-details {
 		left: 0;

@@ -13,7 +13,8 @@ jQuery(document).ready(function ($) {
 			},
 			success:function(data){
 				filter.find('button').text('חפש'); // changing the button label back
-				$('#response').html(data); // insert data
+				var result = $(data).find('#response').html();
+				$('#response').html(result);
 			}
 		});
 		return false;

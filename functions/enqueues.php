@@ -13,6 +13,9 @@ if ( ! function_exists('b4st_enqueues') ) {
 
 		wp_register_style('b4st-css', get_template_directory_uri() . '/theme/css/b4st.css', false, null);
 		wp_enqueue_style('b4st-css');
+		
+		wp_register_style('main-style', get_template_directory_uri() . '/style.css');
+		wp_enqueue_style('main-style');
 
 		// Scripts
 

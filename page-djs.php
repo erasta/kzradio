@@ -36,9 +36,17 @@ get_header();
                                         ?>
                                             <li class="item">
                                                 <a href="<?php echo esc_url($dj_link); ?>">			
-													<?php $dj_img_id = get_field('dj_photo', $dj);
-													$dj_img = wp_get_attachment_image( $dj_img_id, 'dj_img', ''); 
-													echo $dj_img; ?>
+													<?php 
+														$dj_img_id = get_field('dj_photo', $dj);
+														$dj_img_small_id = get_field('dj_photo_small', $dj);
+														$dj_img_small = wp_get_attachment_image( $dj_img_small_id, 'dj_img', '', array( 'alt'=>$dj->name ) );
+														$dj_img = wp_get_attachment_image( $dj_img_id, 'dj_img', '', array( 'alt'=>$dj->name ) );
+														
+														if( $dj_img_small_id )
+															echo $dj_img_small;
+														else
+															echo $dj_img; 
+													?>
                                                     <span class="dj-name"><?php echo $dj->name; ?></span>
                                                 </a>
                                             </li>
