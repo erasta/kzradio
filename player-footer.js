@@ -35,8 +35,8 @@ function player_backtolive(image,title)
 	jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: livestream});
 	jQuery("#jquery_jplayer_1").jPlayer("play");
 	jQuery('#jplayer_title').text("שידור חי: "+title);
-    document.getElementById('player_image_div').style.backgroundImage="url("+image+")";
 	document.getElementById("jp-duration").style.display = "none";
+    document.getElementById('player_image_div').style.backgroundImage="url("+image+")";
 
 	// findCurrShow();
 }
@@ -111,11 +111,11 @@ function playerInit($) {
 				logdebug("player pause event");
 				logdebug(JSON.stringify(event));
 				is_playing=false;
-// 				jQuery("#jquery_jplayer_1").jPlayer("clearMedia");
 // 				debugger;
 				if (is_live)
 				{
     				jQuery("#jquery_jplayer_1").jPlayer("clearMedia");					
+// 					jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: livestream});
 				}
 			},
 			play: function(event)

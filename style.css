@@ -104,6 +104,7 @@ body {
 /* ==============================================*/
 
 #header li.menu-item a {
+	display: inline-block;
 	color: white;
 	padding: 4px;
 	transition: all .2s ease-in-out;
@@ -1102,6 +1103,7 @@ body.page-template-page-support-us #main {
 	}
 	.icons-container img {
 		height: auto;
+		width: 63px;
 	}
 
 	#wrapper-schedule .schedule-table {
@@ -1129,6 +1131,9 @@ body.page-template-page-support-us #main {
 
 	.footer-credits .title {
 		font-size: 16px;
+	}
+	.footer-credits .inner-credits:first-child .title {
+		margin-bottom: 8px;
 	}
 }
 /* Support Us - end */

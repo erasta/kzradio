@@ -104,14 +104,15 @@ div.wpcf7 .ajax-loader {position:absolute;}
 	padding: 4px;
 }
 
-#header li.menu-item a::after {
+#header li.menu-item::after {
 	content: "/";
-	margin-right: 8px;
+	margin-right: 4px;
+	margin-left: 4px;
     color: white;
     font-size: 16px;
 }
 
-#header li.menu-item:last-of-type a::after {
+#header li.menu-item:last-of-type::after {
 	content: "";
 }
 
