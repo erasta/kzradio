@@ -24,7 +24,7 @@ get_header();
 					<div class="row">
 						<div class="col-sm-12">
 							<?php /*<form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="shows-filter">*/ ?>
-							<form action="<?php // leave it empty (or talk to Avi :) ) ?>" method="POST" id="shows-filter">
+							<form action="<?php echo site_url() ?>/last-shows #response" method="POST" id="shows-filter">
 								<!--<div class="text-row">
 									<input id="textsearch" type="text" name="free_search" placeholder="חיפוש חופשי" />
 								</div>-->

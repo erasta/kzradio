@@ -24,9 +24,17 @@ get_header();
                                 <div class="wrapper">
                                     <?php
                                         $djs = get_terms( array(
-                                            'taxonomy' => 'djs',
-                                            'hide_empty' => false
-                                        ));
+											'taxonomy' => 'djs',
+											'hide_empty' => false,
+											'meta_query'		=> array(
+												'relation'		=> 'AND',
+												array(
+													'key'			=> 'dont_show',
+													'value'			=> true,
+													'compare'		=> '!='
+												)
+											)
+										));
                                         shuffle( $djs );
                                     ?>
                                     <ul class="items">

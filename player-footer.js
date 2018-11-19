@@ -4,7 +4,7 @@
 // livestream = "http://kpub.mediacast.co.il:8000/stream";
 livestream = "http://kzradio.mediacast.co.il/kzradio_live/kzradio/icecast.audio";
 //  livestream = "<?php the_field( 'streaming_url', 'option'); ?>";
-
+is_live=true;
 
 
 function loadmp3(mp3file,title,image)
@@ -15,6 +15,7 @@ function loadmp3(mp3file,title,image)
 	jQuery("#jquery_jplayer_1").jPlayer("play");
 	// jQuery('#backtolive').show();
 	jQuery('#jplayer_title').text("תוכנית: "+title);
+    is_live=false;
 
 	document.getElementById("jp-current-time-live").style.display = "none";
 	document.getElementById("jp-current-time").style.display = "block";
@@ -28,12 +29,14 @@ function loadmp3(mp3file,title,image)
 
 function player_backtolive(image,title)
 {
+	is_live=true;
 	logdebug("load live stream "+livestream);
 	jQuery("#jquery_jplayer_1").jPlayer("clearmedia");
 	jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: livestream});
 	jQuery("#jquery_jplayer_1").jPlayer("play");
 	jQuery('#jplayer_title').text("שידור חי: "+title);
     document.getElementById('player_image_div').style.backgroundImage="url("+image+")";
+	document.getElementById("jp-duration").style.display = "none";
 
 	// findCurrShow();
 }
@@ -88,7 +91,7 @@ function playerInit($) {
 			ready: function ()
 			{
 				logdebug("player ready event");
-				$(this).jPlayer("setMedia", streamInfo);
+// 				$(this).jPlayer("setMedia", streamInfo);
 			},
 			loadstart: function()
 			{
@@ -110,6 +113,10 @@ function playerInit($) {
 				is_playing=false;
 // 				jQuery("#jquery_jplayer_1").jPlayer("clearMedia");
 // 				debugger;
+				if (is_live)
+				{
+    				jQuery("#jquery_jplayer_1").jPlayer("clearMedia");					
+				}
 			},
 			play: function(event)
 			{
@@ -118,13 +125,19 @@ function playerInit($) {
 			},
 		 	error: function(event)
 			{
+				logdebug("error event");
+
 				console.log(new Date().toLocaleString(), "player error event", event);
 
 				//if(ready && event.jPlayer.error.type === $.jPlayer.error.URL_NOT_SET)
-				if (is_playing)
+				if (is_live)
 				{
-					// Setup the media stream again and play it.
-// 	                jQuery("#jquery_jplayer_1").jPlayer("play");
+					if(!is_playing) 
+					{
+						// Setup the media stream again and play it.
+						jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: livestream});
+						jQuery("#jquery_jplayer_1").jPlayer("play");
+					}
 				}
 		    },
 			swfPath: "/js",
