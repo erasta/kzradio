@@ -1,49 +1,3 @@
-<style>
-	@keyframes laser { 0% { border-color: red; } 33% { border-color: purple; } 67% { border-color: green; } 100% { border-color: red; } }
-</style>
-<script>
-	function rotateElementDegrees(e, deg, msec, after) {
-	e.style.transition = "all 200ms ease";
-	e.style.transform = "translateY(-50%) rotate(" + deg + "deg)";
-	setTimeout(after, msec);
-}
-
-function createLineElement(x, y, length, angle, color) {
-	var line = document.createElement("div");
-	var styles = 'border: 1px solid ' + color + '; '
-	+ 'width: ' + length + 'px; '
-	+ 'height: 0px; '
-	+ 'transform: rotate(' + angle + 'rad); '
-	+ 'position: absolute; '
-	+ 'top: ' + y + 'px; '
-	+ 'left: ' + x + 'px; '
-	+ 'animation: 200ms laser infinite; ';
-	line.setAttribute('style', styles);
-	return line;
-}
-
-function createLine(x1, y1, x2, y2, color) {
-	var a = x1 - x2,
-		b = y1 - y2,
-		c = Math.sqrt(a * a + b * b);
-
-	var sx = (x1 + x2) / 2,
-		sy = (y1 + y2) / 2;
-
-	var x = sx - c / 2,
-		y = sy;
-
-	var alpha = Math.PI - Math.atan2(-b, a);
-
-	return createLineElement(x, y, c, alpha, color);
-}
-
-function checkVisible(elm) {
-	var rect = elm.getBoundingClientRect();
-	var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
-	return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
-}
-
 function showPlasma() {
 	var start = Date.now();
     var img=document.getElementById("logo-img");
@@ -148,6 +102,111 @@ function showPlasma() {
 	init();
 }
 
+function rotateCatHead() {
+    function rotateElementDegrees(e, deg, msec, after) {
+        e.style.transition = "all 200ms ease";
+        e.style.transform = "translateY(-50%) rotate(" + deg + "deg)";
+        setTimeout(after, msec);
+    }
+
+    var es = document.getElementsByClassName("donate-image");
+    rotateElementDegrees(es[0], 10, 200, () => {
+        rotateElementDegrees(es[0], -10, 200, () => {
+            rotateElementDegrees(es[0], 10, 200, () => {
+                rotateElementDegrees(es[0], -10, 200, () => {
+                    rotateElementDegrees(es[0], 0, 200, () => {
+                        donateRotate();
+                    });
+                });
+            });
+        });
+    });
+}
+
+document.write(`
+<style>
+	@keyframes laser { 0% { border-color: red; } 33% { border-color: purple; } 67% { border-color: green; } 100% { border-color: red; } }
+</style>
+`);
+
+function showLasers() {
+
+    function createLineElement(x, y, length, angle, color) {
+        var line = document.createElement("div");
+        var styles = 'border: 1px solid ' + color + '; '
+        + 'width: ' + length + 'px; '
+        + 'height: 0px; '
+        + 'transform: rotate(' + angle + 'rad); '
+        + 'position: absolute; '
+        + 'top: ' + y + 'px; '
+        + 'left: ' + x + 'px; '
+        + 'animation: 200ms laser infinite; ';
+        line.setAttribute('style', styles);
+        return line;
+    }
+
+    function createLine(x1, y1, x2, y2, color) {
+        var a = x1 - x2,
+            b = y1 - y2,
+            c = Math.sqrt(a * a + b * b);
+
+        var sx = (x1 + x2) / 2,
+            sy = (y1 + y2) / 2;
+
+        var x = sx - c / 2,
+            y = sy;
+
+        var alpha = Math.PI - Math.atan2(-b, a);
+
+        return createLineElement(x, y, c, alpha, color);
+    }
+
+    var es = document.getElementsByClassName("donate-image");
+    var bodyRect = document.body.getBoundingClientRect(),
+        elemRect = es[0].getBoundingClientRect();
+    var x1 = 18 + elemRect.left - bodyRect.left;
+    var y1 = 61 + elemRect.top - bodyRect.top;
+    var x2 = Math.random() * document.body.clientWidth;
+    var y2 = Math.random() * document.documentElement.clientHeight;//document.body.clientHeight;
+    var e1 = createLine(x1, y1, x2, y2, 'red');
+    var e2 = createLine(x1 + 18, y1, x2, y2, 'red');
+    document.body.appendChild(e1);
+    document.body.appendChild(e2);
+    setTimeout(() => {
+        document.body.removeChild(e1);
+        document.body.removeChild(e2);
+        donateRotate();
+    }, 1000);
+}
+
+document.write(`
+<style>
+@keyframes lightningflash {
+	from { filter: brightness(1);; }
+	20% { filter: brightness(2); }
+    40% { filter: brightness(1.5); }
+    70% { filter: brightness(3); }
+	to { filter: brightness(1); }
+}
+</style>
+`);
+
+function showLightning() {
+    var e = document.getElementById('show-image-curr');
+    if (!e) return donateRotate();
+    e.style.animation = 'lightningflash 500ms';
+    setTimeout(() => {
+        e.style.animation = '';
+        donateRotate();
+    }, 1000);
+}
+
+function checkVisible(elm) {
+	var rect = elm.getBoundingClientRect();
+	var viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);
+	return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+}
+
 var donateRotateInterval = 10000;
 var donateRotateSpecial = 0.1;
 
@@ -156,37 +215,15 @@ function donateRotate() {
 		var es = document.getElementsByClassName("donate-image");
 		if (es && es.length && checkVisible(es[0])) {
 			if (Math.random() < donateRotateSpecial) {
-				if (Math.random() < 0.5) {
+				if (Math.random() < 0.3) {
 					showPlasma();
+				} else if (Math.random() < 0.6) {
+					showLightning();
 				} else {
-					var bodyRect = document.body.getBoundingClientRect(),
-						elemRect = es[0].getBoundingClientRect();
-					var x1 = 18 + elemRect.left - bodyRect.left;
-					var y1 = 61 + elemRect.top - bodyRect.top;
-					var x2 = Math.random() * document.body.clientWidth;
-					var y2 = Math.random() * document.documentElement.clientHeight;//document.body.clientHeight;
-					var e1 = createLine(x1, y1, x2, y2, 'red');
-					var e2 = createLine(x1 + 18, y1, x2, y2, 'red');
-					document.body.appendChild(e1);
-					document.body.appendChild(e2);
-					setTimeout(() => {
-						document.body.removeChild(e1);
-						document.body.removeChild(e2);
-						donateRotate();
-					}, 1000);
+                    showLasers();
 				}
 			} else {
-				rotateElementDegrees(es[0], 10, 200, () => {
-					rotateElementDegrees(es[0], -10, 200, () => {
-						rotateElementDegrees(es[0], 10, 200, () => {
-							rotateElementDegrees(es[0], -10, 200, () => {
-								rotateElementDegrees(es[0], 0, 200, () => {
-									donateRotate();
-								});
-							});
-						});
-					});
-				});
+                rotateCatHead();
 			}
 		} else {
 			donateRotate();
@@ -194,4 +231,3 @@ function donateRotate() {
 	}, donateRotateInterval);
 }
 donateRotate();
-</script>

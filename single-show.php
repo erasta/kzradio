@@ -37,7 +37,8 @@ get_header();
 									</a>
                                 </span>
                             </h1>
-							<h2 class="episode-title">
+							<h2 class="episode-title"
+								<?php if (strpbrk(get_the_title(), "אבגדהוזחטיכלמנסעפרקשתןםךףץ") == false) echo "style='direction: ltr'"; ?> >
                                 <span><?php the_title(); ?></span>
                             </h2>
                         </div>

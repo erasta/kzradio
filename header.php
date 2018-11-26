@@ -30,8 +30,8 @@
 
 		<link rel="stylesheet" href="<?php bloginfo('template_url'); ?>/style.css" type="text/css" media="screen" />
 
-<?php include_once('player-header.js'); ?>
-<?php include_once('animation.js'); ?>
+<script type="text/javascript"> <?php include_once('player-header.js'); ?> </script>
+<script type="text/javascript"> <?php include_once('animation.js'); ?> </script>
 
 </head>
 <body <?php body_class(); ?>>

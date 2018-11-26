@@ -1,5 +1,3 @@
-<script>
-
 function is_empty(val)
 {
    return (val === undefined || val == null || val.length <= 0) ? true : false;
@@ -62,6 +60,4 @@ function logdebug(msg)
 {
   console.log(getDateTime()+" "+msg);
 }
-
-</script>
 

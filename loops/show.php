@@ -18,7 +18,7 @@ if (has_post_thumbnail()){
                 <a href="<?php echo get_term_link( $term ) ?>" class="data od-show-dj"><?php echo $term->name; ?></a>
             <?php } ?>
             <br />
-			<span class="data od-title">
+			<span class="data od-title" <?php if (strpbrk(get_the_title(), "אבגדהוזחטיכלמנסעפרקשתןםךףץ") == false) echo "style='direction: ltr'"; ?> >
 				<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 			</span><br/>
 			<span class="show-name-wrapper">
