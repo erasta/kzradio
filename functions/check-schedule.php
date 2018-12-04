@@ -116,9 +116,10 @@ function make_main_banner($showlive) {
     if (array_key_exists("image_position", $showlive)) {
         $objpos = 'object-position: 50% ' . $showlive["image_position"] . '%';
     }
+    $realt = array_key_exists("realtime", $showlive) ? $showlive["realtime"] : "";
 	return
 '<div class="main-banner">
-	<div href="#" id="show-link-curr" realtime="' . $showlive["realtime"] . '">
+	<div href="#" id="show-link-curr" realtime="' . $realt . '">
 		<img id="show-image-curr"
 			src="' . $showlive["image_full"] . '"
 			alt="' . $showlive["desc"] .'"
@@ -149,9 +150,10 @@ function make_main_banner($showlive) {
 }
 
 function make_next_banner($showfirst, $num) {
-	$active = array_key_exists("start", $showfirst) ? '' : ' nonactive';
+    $active = array_key_exists("start", $showfirst) ? '' : ' nonactive';
+    $realt = array_key_exists("realtime", $showfirst) ? $showfirst["realtime"] : "";
 	return
-'<div id="next-show-' . $num . '" class="next-show-item' . $active .'" realtime="' . $showfirst["realtime"] . '">
+'<div id="next-show-' . $num . '" class="next-show-item' . $active .'" realtime="' . $realt . '">
 	<div class="show-overlay" style="background: ' . $showfirst["dj_colour"] . ';"></div>
 	<div id="show-link-' . $num . '">
 		<img id="show-image-' . $num . '"

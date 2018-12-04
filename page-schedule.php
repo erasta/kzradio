@@ -41,9 +41,9 @@ get_header();
 								if ($times['starthour'] < 5) {
 									$times['starthour'] += 24;
 									$times['endhour'] += 24;
-									$shows[($daynum + 6) % 7]['times'][round($times[starthour] * 100)] = $times;
+									$shows[($daynum + 6) % 7]['times'][round($times['starthour'] * 100)] = $times;
 								} else {
-									$shows[$daynum]['times'][round($times[starthour] * 100)] = $times;
+									$shows[$daynum]['times'][round($times['starthour'] * 100)] = $times;
 								}
 							}
 							ksort($shows[$daynum]['times']);

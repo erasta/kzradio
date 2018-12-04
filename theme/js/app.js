@@ -26,8 +26,23 @@ jQuery(document).ready(function ($) {
 	$('input[type=reset]').click(function() {
 		$('button.search').removeClass('cta');
 		setTimeout(function() {
-			$('#shows-filter').submit();			
+			$('#shows-filter').submit();
 		}, 100);
-	})
-	
+	});
+
+	if ($('.share').length) {
+   		jQuery(window).on('scroll', function () {
+	        var top = jQuery(window).scrollTop(),
+	            divBottom = jQuery('.share .buttons').offset().top + jQuery('.share .buttons').outerHeight();
+	        if (divBottom > top) {
+	            setTimeout(function() {
+   					$('.share .buttons a').addClass('animated bounce');
+   					setTimeout(function () {
+   						$('.share .buttons a').removeClass('animated bounce');
+   					}, 2500);
+   			}, 1500);
+	        }
+	    });
+   	}
+
 });

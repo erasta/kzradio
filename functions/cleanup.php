@@ -31,14 +31,14 @@ if ( ! function_exists('show_less_login_info') ) {
 }
 add_filter( 'login_errors', 'show_less_login_info' );
 
-// Do not generate and display WordPress version
+// // Do not generate and display WordPress version
 
-if ( ! function_exists('b4st_remove_generator') ) {
-  function b4st_remove_generator()  {
-    return '';
-  }
-}
-add_filter( 'the_generator', 'no_generator' );
+// if ( ! function_exists('b4st_remove_generator') ) {
+//   function b4st_remove_generator()  {
+//     return '';
+//   }
+// }
+// add_filter( 'the_generator', 'no_generator' );
 
 // Remove Query Strings From Static Resources
 

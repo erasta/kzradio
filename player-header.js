@@ -6,6 +6,10 @@ function is_empty(val)
 function player_update_live_show(showObject)
 {
     console.log(new Date().toLocaleString(), "player_update_live_show: ", showObject);
+	if (!is_live)
+	{
+		return true;
+	}
     if (!showObject)return false;
     if (!showObject.start || !showObject.end) {
         var currHour = new Date().getHours();
