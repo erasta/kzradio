@@ -541,12 +541,14 @@ input[type=reset] {
     left: 0.5rem;
     bottom: 0.5rem;
 	z-index: 2;
+	text-align: left;
+    max-width: 80%;
 }
 .od-item .tags .tag {
     border: 1px solid #fff;
     font-size: 12px;
     padding: 2px !important;
-    margin-right: 4px;
+    margin: 0 2px 4px;
     font-weight: 400;
 	text-decoration: none;
 }
@@ -1441,7 +1443,15 @@ a.about-anchor:active {
   transition: all .5s ease-in-out;
 }
 
-.chart-container input, .chart-container textarea { margin: 0 5px; border: 1px solid #1b1b1c; font-size: 17px; color: #1b1b1c; padding: 10px; border-radius: 0; background: transparent; outline: 0; text-align: center; }
+.chart-container input,
+.chart-container textarea { 
+	margin: 0 5px; border: 1px solid #1b1b1c; font-size: 17px; color: #1b1b1c; width: 100%; padding: 10px; border-radius: 0; background: transparent; outline: 0; text-align: center; 
+}
+.chart-container input[type="checkbox"] {
+	float: right;
+	width: auto;
+	margin: 8px 0 8px 8px;
+}
 .chart-container .content.send { justify-content: center; text-align: center; }
     .chart-container .content.send div { flex-basis: 100%; margin-bottom: 1rem; }
         .chart-container .content.send .spaceship {transition: all 2s ease-in-out;}

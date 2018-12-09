@@ -15,7 +15,7 @@ The Single Post
 		<header style="background-image: url('<?php echo $thumbnail; ?>');">
 			<div class="blog-post-titles">
 				<h1><?php the_title(); ?></h1>	
-				<h2>רוצים לקרוא? גללו ותגלו</h2>
+				<h2>מגזין הקצה</h2>
 			</div>
 		</header>
 		<main>
@@ -26,7 +26,7 @@ The Single Post
 		<footer>
 			<p class="blog-post-meta">
 				--<br>
-				האותיות הקטנות
+				 
 				<br>
 				<!--?php _e('פורסם בבלוג בתאריך ', 'b4st'); b4st_post_date(); ?-->
 				<span class="entry-date">פורסם בתאריך <?php echo get_the_date(); ?></span><br>

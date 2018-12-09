@@ -7,31 +7,9 @@
 get_header();
 ?>
 
-<!-- <script src="https://code.jquery.com/jquery-git1.js"></script>
-<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/additional-methods.min.js"></script>
-<script type="text/javascript">
-            jQuery( document ).ready(function() {
-
-                jQuery('#ss-form').submit(function(event) {
-                    if(jQuery('#ss-form').valid())
-                    {
-                        submitted = true;
-                        jQuery('#ss-form').fadeOut();
-                        jQuery('#thanksman').fadeIn();
-                        return true;
-                    }
-
-                    submitted = false;
-                    return false;
-                });
-            });
-
-            var submitted = false;
-        </script>
-<div id="form-container">
-<div id="form">-->
+<style>
+    a {color: gray;}
+</style>
     <div id="content">
         <?php $bg = get_field('bg'); ?>
         <div class="chart-container" style="background-image: url('<?php echo $bg['url']; ?>');">
@@ -50,7 +28,8 @@ get_header();
                     </div>
                     <div class="details">
                         <table style="width:100%"><tr>
-                            <td style="padding-left: 5px;"><input type="text" class="ss-q-short kz-req" aria-label="שם מלא"       name="entry.17759131" placeholder="שם מלא"   /></td>
+                            <td style="padding-left: 5px;"><input type="text" class="ss-q-short kz-req" aria-label="שם פרטי"       name="entry.17759131" placeholder="שם פרטי"   /></td>
+                            <td style="padding-left: 5px;"><input type="text" class="ss-q-short kz-req" aria-label="שם משפחה"       name="entry.1323075005" placeholder="שם משפחה"   /></td>
                             <td style="padding: 0 5px;"><input type="text" class="ss-q-short kz-req" aria-label="מייל"         name="entry.2051152561" placeholder="אימייל" /></td>
                             <td style="padding-right: 5px;"><input type="text" class="ss-q-short kz-req" aria-label="מקום מגורים"  name="entry.1470743141" placeholder="עיר/ישוב" /></td>
                         </tr></table>
@@ -116,6 +95,7 @@ get_header();
                                 <tr><td>2</td>    <td><input type="text" class="ss-q-short" placeholder="הופעת השנה" name="entry.256847024"/></td></tr>
                                 <tr><td>3</td>    <td><input type="text" class="ss-q-short" placeholder="סדרת הטלויזיה של השנה" name="entry.784331204"/></td></tr>
                                 <tr><td>&nbsp;</td>    <td><textarea class="ss-q-short" placeholder="יש לך משהו להוסיף, לגלות לשתף?" name="entry.384525549" data-rows="5"></textarea></td></tr>
+                                <tr><td>&nbsp;</td>    <td><input type="checkbox" name="entry.1357401023" value="תצטרפו לרשימת התפוצה? שולחים הפתעות ועדכונים" />תצטרפו לרשימת התפוצה? שולחים הפתעות ועדכונים</td></tr>
                             </table>
                         </div>
                     </div>
@@ -131,29 +111,32 @@ get_header();
                     </div>
 
                     <script>
-                        function checkform() {
-                            var req = document.getElementsByClassName('kz-req');
-                            var good = true;
-                            for (var i = 0; i < req.length; ++i) {
-                                var bad = req[i].value.length === 0;
-                                req[i].style.backgroundColor = bad ? "lightcoral" : "white";
-                                if (good && bad) {
-                                    good = false;
-                                    req[i].focus();
-                                }
-                            }
+                        // function checkform() {
+                        //     var req = document.getElementsByClassName('kz-req');
+                        //     var good = true;
+                        //     for (var i = 0; i < req.length; ++i) {
+                        //         var bad = req[i].value.length === 0;
+                        //         req[i].style.backgroundColor = bad ? "lightcoral" : "white";
+                        //         if (good && bad) {
+                        //             good = false;
+                        //             req[i].focus();
+                        //         }
+                        //     }
 
-                            if (good) {
-                                jQuery('.spaceship').addClass('launch');
-                                setTimeout(function() {
-                                    jQuery('.send').fadeOut(200);
-                                    // jQuery('.thanks').fadeIn(200);
-									// setTimeout(function() {
-                                    jQuery('#ss-submit').click();
-                                    // }, 2000);
-                                }, 1000);
-                            }
-                        }
+                        //     if (good) {
+                        //         jQuery('.spaceship').addClass('launch');
+                        //         setTimeout(function() {
+                        //             jQuery('.send').fadeOut(200);
+                        //             // jQuery('.thanks').fadeIn(200);
+						// 			// setTimeout(function() {
+                        //             jQuery('#ss-submit').click();
+                        //             // }, 2000);
+                        //         }, 1000);
+                        //     }
+                        // }
+                        // function checkform() {
+                        //     var req = document.getElementsByClassName('kz-req');var good = true;for (var i = 0; i < req.length; ++i) {var bad = req[i].value.length === 0;req[i].style.backgroundColor = bad ? 'lightcoral' : 'white';if (good && bad) {good = false;req[i].focus();}}if (good) {jQuery('.spaceship').addClass('launch');setTimeout(function() {jQuery('.send').fadeOut(200);jQuery('#ss-submit').click();}, 1000);}
+                        // }
                     </script>
                     <div class="content send">
                         <?php $spaceship = get_field('spaceship_image'); ?>
@@ -161,17 +144,17 @@ get_header();
                             <img src="<?php echo $spaceship['url']; ?>" class="spaceship" alt="Send">
                         </div>
                         <div class="buttons">
-                            <button id="ss-submit-fake" type="button" onclick="checkform()">שגרו את הטופס</button>
+                            <button id="ss-submit-fake" type="button" onclick="var req = document.getElementsByClassName('kz-req');var good = true;for (var i = 0; i < req.length; ++i) {var bad = req[i].value.length === 0;req[i].style.backgroundColor = bad ? 'lightcoral' : 'white';if (good && bad) {good = false;req[i].focus();}}if (good) {jQuery('.spaceship').addClass('launch');setTimeout(function() {jQuery('.send').fadeOut(200);jQuery('#ss-submit').click();}, 1000);}">שגרו את הטופס</button>
                             <button id="ss-submit" type="submit" style="display: none">שגרו את הטופס</button>
                             <!-- <button id="ss-submit" type="submit">שלח/י</button> -->
                             <iframe id="wholeform" style="display: none"></iframe>
                         </div>
                     </div>
                     <div class="content credits">
-                        <img src="https://www.kzradio.net/wp-content/uploads/2018/12/kilombo2x.png" style="max-height: 64px; margin-top: -8px;">
-                        <img src="https://www.kzradio.net/wp-content/uploads/2018/12/ista2x.png" style="max-height: 50px;">
-                        <img src="https://www.kzradio.net/wp-content/uploads/2018/12/indnegev2x.png" style="max-height: 40px; margin-top: 8px;">
-                        <img src="https://www.kzradio.net/wp-content/uploads/2018/08/bpm@2x.png" style="max-height: 55px; margin-top: 8px;">
+                        <img src="/wp-content/uploads/2018/12/kilombo2x.png" style="max-height: 64px; margin-top: -8px;">
+                        <img src="/wp-content/uploads/2018/12/ista2x.png" style="max-height: 50px;">
+                        <img src="/wp-content/uploads/2018/12/indnegev2x.png" style="max-height: 40px; margin-top: 8px;">
+                        <img src="/wp-content/uploads/2018/08/bpm@2x.png" style="max-height: 55px; margin-top: 8px;">
                     </div>
                     <div class="content thanks">
                         <p>

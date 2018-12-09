@@ -82,7 +82,7 @@
 			<div class="powered">
 				<div class="powered-label">Powered by</div>
 				<a href="https://www.bpm-music.com/" class="social-icon" target="_blank">
-					<img src="wp-content/uploads/2018/08/bpm@2x.png" title="BPM">
+					<img src="/wp-content/uploads/2018/08/bpm@2x.png" title="BPM">
 				</a>
 			</div>
 		</nav>
