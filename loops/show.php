@@ -7,10 +7,9 @@ if (has_post_thumbnail()){
     $thumbnail = get_the_post_thumbnail_url($id, 'large');
 } else {
     $thumbnail_id = get_field('show_image', 'shows_'.$shows_term['0']->term_id);
-	$thumbnail = wp_get_attachment_image_src($thumbnail_id ,'full')[0];
+	$thumbnail = wp_get_attachment_image_src($thumbnail_id ,'large')[0];
 }?>
     <div class="od-item center-bg" style="background-image: url('<?php echo $thumbnail; ?>');" id="post_<?php the_ID()?>">
-		<div class="dj-overlay" style="background-color: <?php echo '#'.get_field( 'colour', $djs_term[0]); ?>"></div>
 		<a href="<?php the_permalink(); ?>" class="show-link"></a>
 		<span class="data od-show-time"><span class="show-date"><?php echo get_the_date('j.n.Y'); ?></span></span>
         <div class="od-details">

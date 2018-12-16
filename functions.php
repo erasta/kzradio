@@ -1,4 +1,10 @@
 <?php
+
+add_action( 'init', 'stop_heartbeat', 1 );
+function stop_heartbeat() {
+wp_deregister_script('heartbeat');
+}
+
 /*
 All the functions are in the PHP files in the `functions/` folder.
 */
@@ -220,10 +226,7 @@ function custom_taxonomy() {
 }
 add_action( 'init', 'custom_taxonomy', 0 );
 
-add_action( 'init', 'stop_heartbeat', 1 );
-function stop_heartbeat() {
-wp_deregister_script('heartbeat');
-}
+
 
 function cc_mime_types($mimes) {
   $mimes['svg'] = 'image/svg+xml';

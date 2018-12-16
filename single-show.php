@@ -77,7 +77,7 @@ get_header();
 
                             <!-- Playlist -->
                             <div class="share">
-                                <div>למען השייר</div>
+                                <div>Share-למען ה</div>
                                 <div class="buttons">
                                     <a href="https://telegram.me/share/url?url=<?php the_permalink(); ?>&text=<?php the_title(); ?>" target="_blank" style="width: 36px; height: 36px;">
                                         <svg width="36" height="36" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1189 1307l147-693q9-44-10.5-63t-51.5-7l-864 333q-29 11-39.5 25t-2.5 26.5 32 19.5l221 69 513-323q21-14 32-6 7 5-4 15l-415 375-16 228q23 0 45-22l108-104 224 165q64 36 81-38zm603-411q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z" fill="#fff"/></svg>
@@ -107,7 +107,7 @@ get_header();
 								} else {
 							?>
 									<div class="no-playlist">
-										הפלייליסט לתכנית זו תפורסם בקרוב...
+										הפלייליסט לתכנית זו יפורסם בקרוב...
 									</div>
 							<?php
 								}

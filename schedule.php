@@ -48,8 +48,8 @@ function findCurrShow() {
 
     // Next check is the earlier of curr show end, next show start, 15 minutes from now, but not before 1 minute from now.
 	var d = new Date(), nextCheck = new Date(d), nextMinute = new Date(d);
-    nextCheck.setMinutes(d.getMinutes() + 15);
-    nextMinute.setMinutes(d.getMinutes() + 1);
+    nextCheck.setMinutes(d.getMinutes() + 25);
+    nextMinute.setMinutes(d.getMinutes() + 5);
     nextCheck = new Date(Math.max(nextMinute, Math.min(nextCheck, nextShowObject.startTime, currShowObject.endTime)));
 
 	var checkms = nextCheck - Date.now();
@@ -58,7 +58,7 @@ function findCurrShow() {
 	setTimeout(() => {
 		// Get curr shows banners from server
 		jQuery.ajax({
-			url: "<?php echo admin_url('admin-ajax.php'); ?>",
+			url: "<?php echo admin_url('admin-ajax.php?html_curr_schedule=true'); ?>",
 			type: "POST",
 			cache: false,
 			data: 'action=html_curr_schedule',
