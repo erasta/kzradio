@@ -45,8 +45,8 @@
            src="https://www.facebook.com/tr?id=791624944509880&ev=PageView&noscript=1"/>
     </noscript>
     <!-- End Facebook Pixel Code -->
-	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php wp_head(); ?>
 		<link type="text/css" href="/css/jplayer/blue.monday/css/jplayer.blue.monday.css?reload2" rel="stylesheet" />

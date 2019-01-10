@@ -1,13 +1,11 @@
 <?php
-
+/*
+All the functions are in the PHP files in the `functions/` folder.
+*/
 add_action( 'init', 'stop_heartbeat', 1 );
 function stop_heartbeat() {
 wp_deregister_script('heartbeat');
 }
-
-/*
-All the functions are in the PHP files in the `functions/` folder.
-*/
 
 require get_template_directory() . '/functions/cleanup.php';
 require get_template_directory() . '/functions/setup.php';
@@ -65,6 +63,30 @@ function restrict_rest_api_to_localhost() {
 add_action( 'rest_api_init', 'restrict_rest_api_to_localhost', 1 );
 
 
+/**
+*  Disables WordPress Rest API for external requests
+*/
+function add_cpt_to_archives( $query ) {
+  if( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) {
+    $query->set( 'post_type', array(
+     		'show',
+		));
+	  	return $query;
+	}
+	if ( $query->is_search ) {
+
+		if( isset( $_POST['shows'] ) )
+	        $args['tax_query'] = array(
+	            array(
+	                'taxonomy' => 'shows',
+	                'field' => 'id',
+	                'terms' => $_POST['shows']
+	            )
+	        );
+	}
+}
+add_filter( 'pre_get_posts', 'add_cpt_to_archives' );
+
 
 /**
 *  Fetch last time "options" page was saved.
@@ -80,6 +102,7 @@ function my_acf_save_post($options) {
     update_field($lastTimeKey, $currTime, $options);
 }
 add_action('acf/save_post', 'my_acf_save_post', 1);
+
 
 /** Add all CPT's to At A Glance */
 add_action( 'dashboard_glance_items', 'cpad_at_glance_content_table_end' );
@@ -102,6 +125,10 @@ function cpad_at_glance_content_table_end() {
 		}
 	}
 }
+
+/**
+*  Post Types
+*/
 
 /**
 *  Post Types

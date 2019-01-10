@@ -579,6 +579,12 @@ input[type=reset] {
 .od-item .play:hover {
 	opacity: 1;
 }
+@media screen and (max-width: 767px) {
+    .od-item { height: 180px; }
+    .od-details .od-title { font-size: 16px; }
+    .od-details .od-show-name { font-size: 20px; }
+    .od-details .od-show-dj { font-size: 14px; }
+}
 
 .results {
 	max-width: 768px;
@@ -1101,9 +1107,7 @@ body.page-template-page-support-us #main {
 	}
 	#shows-filter .select-row .col-sm-12 {
 		width: 30%;
-	}
-	#shows-filter .select-row .col-sm-12 + .col-sm-12 {
-		margin-right: 3%;
+        margin: 0 0.5rem 1rem;
 	}
 	#shows-filter .select-row select {
 		width: 100%;

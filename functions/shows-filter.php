@@ -138,12 +138,15 @@ function shows_filter_function(){
             )
         );
 
-        if( $_POST['djsfilter'] && !($_GET['djsfilter']) && $_POST['showtypesfilter'] && !($_GET['showtypesfilter']) && $_POST['showsfilter'] && !($_GET['showsfilter']) ) {
+        if( $_POST['djsfilter'] && !($_GET['djsfilter']) && $_POST['showtypesfilter'] && !($_GET['showtypesfilter']) && $_POST['showsfilter'] && !($_GET['showsfilter']) && $_POST['free_search'] && !($_GET['free_search']) ) {
             $pagination_args['djsfilter'] = $_POST['djsfilter'];
             $pagination_args['showtypesfilter'] = $_POST['showtypesfilter'];
             $pagination_args['showsfilter'] = $_POST['showsfilter'];
+			// $pagination_args['free_search'] = $_POST['free_search'];
         }
     }
+
+
 
     if( isset( $_REQUEST['free_search'] ) ) {
         $args['s'] = $_REQUEST['free_search'];
