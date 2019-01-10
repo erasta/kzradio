@@ -15,7 +15,8 @@ get_header();
         <div class="chart-container" style="background-image: url('<?php echo $bg['url']; ?>');">
             <div class="image-header"><?php the_post_thumbnail('extra_large'); ?></div>
             <div class="chart-content">
-                <form id="ss-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdurEz658_VRV7sQCDyIKBeviNhuvgedc8yUglycNDbzSxyJA/formResponse" method="POST" novalidate="" target="hidden_iframe">
+                <form id="ss-form" action="#" method="POST" novalidate="" target="hidden_iframe">
+                <!-- <form id="ss-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdurEz658_VRV7sQCDyIKBeviNhuvgedc8yUglycNDbzSxyJA/formResponse" method="POST" novalidate="" target="hidden_iframe"> -->
                     <input name="pageHistory" type="hidden" value="0" />
                     <div class="content two-sided opening">
                         <div class="side right">
@@ -67,7 +68,7 @@ get_header();
                     <div class="content fields">
                         <div class="side right">
                             <div class="header">אלבומי השנה</div>
-                            <p>חובה לבחור לפחות אלבום אחד. אפשר לבחור עד 10. אין משמעות לסדר הבחירה, לכל בחירה משקל שווה, חות מאלבום השנה שלכםן שיקבל נקודה נוספת.</p>
+                            <p>חובה לבחור לפחות אלבום אחד. אפשר לבחור עד 10. אין משמעות לסדר הבחירה, לכל בחירה משקל שווה, חוץ מאלבום השנה שלכםן שיקבל נקודה נוספת.</p>
                         </div>
                         <div class="side left">
                             <table style="width:100%">
@@ -144,7 +145,7 @@ get_header();
                             <img src="<?php echo $spaceship['url']; ?>" class="spaceship" alt="Send">
                         </div>
                         <div class="buttons">
-                            <button id="ss-submit-fake" type="button" onclick="var req = document.getElementsByClassName('kz-req');var good = true;for (var i = 0; i < req.length; ++i) {var bad = req[i].value.length === 0;req[i].style.backgroundColor = bad ? 'lightcoral' : 'white';if (good && bad) {good = false;req[i].focus();}}if (good) {jQuery('.spaceship').addClass('launch');setTimeout(function() {jQuery('.send').fadeOut(200);jQuery('#ss-submit').click();}, 1000);}">שגרו את הטופס</button>
+                            <button id="ss-submit-fake" type="button" style="display: none" onclick="var req = document.getElementsByClassName('kz-req');var good = true;for (var i = 0; i < req.length; ++i) {var bad = req[i].value.length === 0;req[i].style.backgroundColor = bad ? 'lightcoral' : 'white';if (good && bad) {good = false;req[i].focus();}}if (good) {jQuery('.spaceship').addClass('launch');setTimeout(function() {jQuery('.send').fadeOut(200);jQuery('#ss-submit').click();}, 1000);}">שגרו את הטופס</button>
                             <button id="ss-submit" type="submit" style="display: none">שגרו את הטופס</button>
                             <!-- <button id="ss-submit" type="submit">שלח/י</button> -->
                             <iframe id="wholeform" style="display: none"></iframe>

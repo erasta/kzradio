@@ -2,7 +2,13 @@
 
 function get_show_schedule($daynum) {
 	$cat = get_term(get_sub_field('the_show'), 'shows');
-	$dj = get_term(get_field('show_dj', $cat->taxonomy . '_' . $cat->term_id )[0], 'djs');
+    $dj_arr = get_field('show_dj', $cat->taxonomy . '_' . $cat->term_id );
+    $dj_name = '';
+    for ($i = 0; $i < count($dj_arr); ++$i) {
+        if ($i > 0) $dj_name = $dj_name . ' ו';
+        $dj_name = $dj_name . get_term($dj_arr[$i], 'djs')->name;
+    }
+	$dj = get_term($dj_arr[0], 'djs');
 	$start = get_sub_field('starting_time');
     $end = get_sub_field('ending_time');
     $starthour = intval(explode(":", $start)[0]) + intval(explode(":", $start)[1]) / 60;
@@ -10,7 +16,7 @@ function get_show_schedule($daynum) {
     if ($endhour == 0) $endhour = 24;
 	$dj_colour = get_field( 'colour', $dj ) ? '#'.get_field( 'colour', $dj ) : 'transparent';
 	$is_special = $cat->name == 'ספיישלים';
-	$showname = $is_special ? get_sub_field('subtitle') : $cat->name;
+	$showname = get_sub_field('subtitle') ? get_sub_field('subtitle') : $cat->name;
 
 	$image_id = get_field('show_image', $cat->taxonomy . '_' . $cat->term_id );
 	$show_image = wp_get_attachment_image_src( $image_id, 'next_shows' );
@@ -26,8 +32,9 @@ function get_show_schedule($daynum) {
 		"starthour" => $starthour,
 		"end" => $end,
 		"endhour" => $endhour,
+		"hide_on_schedule" => get_sub_field('hide_on_schedule'),
 		"show" => $showname,
-		"dj" => $dj->name,
+		"dj" => $dj_name,
 		"dj_colour" => $dj_colour,
 		"image" => $image,
 		"image_full" => $image_full,
@@ -122,25 +129,25 @@ function make_main_banner($showlive) {
 	<div href="#" id="show-link-curr" realtime="' . $realt . '">
 		<img id="show-image-curr"
 			src="' . $showlive["image_full"] . '"
-			alt="' . $showlive["desc"] .'"
+			alt="' . htmlspecialchars($showlive["desc"]) .'"
 			style="cursor: pointer; ' . $objpos . '"
-			onclick="javascript:player_backtolive(\''. $showlive["image"] .'\',\''. $showlive["show"] .'\');return false;">
+			onclick="javascript:player_backtolive(\''. $showlive["image"] .'\',\''. htmlspecialchars($showlive["show"]) .'\');return false;">
 		<span class="show-details">
 			<span class="blck-bg">
 				<span class="now-label">עכשיו לייב!</span>
 			</span>
 			<span class="blck-bg">
 				<a href="' . $showlive["linkdj"] .'" id="show-dj-curr" class="dj-name">
-					' . $showlive["dj"] . '
+					' . htmlspecialchars($showlive["dj"]) . '
 				</a>
 			</span>
 			<span class="blck-bg">
 				<a href="' . $showlive["linkshow"] . '" id="show-name-curr" class="show-name">
-					' . $showlive["show"] . '
+					' . htmlspecialchars($showlive["show"]) . '
 				</a>
 			</span>
 			<span class="play-btn" id="play-btn" style="' . $playbtn . '">
-				<img onclick="javascript:player_backtolive(\''. $showlive["image"] .'\',\''. $showlive["show"] .'\');return false;"
+				<img onclick="javascript:player_backtolive(\''. $showlive["image"] .'\',\''. htmlspecialchars($showlive["show"]) .'\');return false;"
 					src="' . $blog . '/theme/images/play-red.svg"
 					alt="Play" style="cursor: pointer;" >
 			</span>
@@ -157,7 +164,7 @@ function make_next_banner($showfirst, $num) {
 	<div class="show-overlay" style="background: ' . $showfirst["dj_colour"] . ';"></div>
 	<div id="show-link-' . $num . '">
 		<img id="show-image-' . $num . '"
-				alt="' . $showfirst["desc"] . '"
+				alt="' . htmlspecialchars($showfirst["desc"]) . '"
 				src="' . $showfirst["image"] . '">
 		<span class="show-details wrapper">
 			<span class="blck-bg">
@@ -165,12 +172,12 @@ function make_next_banner($showfirst, $num) {
 			</span>
 			<span class="blck-bg">
 				<a href="' . $showfirst["linkdj"] . '" id="show-dj-' . $num . '" class="next-show-dj">
-					' . $showfirst["dj"] . '
+					' . htmlspecialchars($showfirst["dj"]) . '
 				</a>
 			</span>
 			<span class="blck-bg">
 				<a href="' . $showfirst["linkshow"] . '" id="show-name-' . $num . '" class="next-show-name">
-					' . $showfirst["show"] . '
+					' . htmlspecialchars($showfirst["show"]) . '
 				</a>
 				<br>
 			</span>

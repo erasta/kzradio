@@ -53,6 +53,7 @@ function findCurrShow() {
     nextCheck = new Date(Math.max(nextMinute, Math.min(nextCheck, nextShowObject.startTime, currShowObject.endTime)));
 
 	var checkms = nextCheck - Date.now();
+	checkms=Math.max(300000,checkms);
 	console.log('next check:', checkms, 'ms --- ', new Date(nextCheck));
 
 	setTimeout(() => {

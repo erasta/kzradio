@@ -23,7 +23,6 @@ $backpos = $thumbnail_position ? ' background-position: 50% ' . $thumbnail_posit
 				<?php get_template_part('loops/shows-loop'); ?>
 			</div>
 		</div><!-- /#content -->
-		<?php get_sidebar(); ?>
 	</div><!-- /.row -->
 </main><!-- /.container -->
 

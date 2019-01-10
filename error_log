@@ -1,0 +1,1 @@
+[08-Dec-2018 13:30:40 UTC] PHP Fatal error:  Call to undefined function get_header() in /home/kzradio/www.kzradio.net/wordpress/wp-content/themes/kzradio/index.php on line 1

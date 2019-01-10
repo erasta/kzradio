@@ -68,15 +68,17 @@ get_header();
 
 					</div><!--.wrapper-->
 				</div><!--.broadcasters-->
-				
+
+				<?php /*
 				<div class="featured-banner">
 					<div class="img-wrapper">
 						<img class="desktop-only" src="https://www.kzradio.net/wp-content/uploads/2018/12/kz-radio-2018-1.jpg" alt="המצעד השנתי של הקצה ועונג שבת - 2018">
 						<img class="mobile-only" src="https://www.kzradio.net/wp-content/uploads/2018/12/kz-radio-2018-mobile.jpg" alt="המצעד השנתי של הקצה ועונג שבת - 2018">
 					</div>
-					<a href="https://www.kzradio.net/2018" class="featured-banner-link">הצביעו עכשיו</a>
+					<a href="https://www.kzradio.net/2018" class="featured-banner-link">האזינו ב-30.12</a>
 				</div><!--.featured-banner-->
-				
+				*/ ?>
+
 
 				<div class="on-demand-and-video">
 					<div class="on-demand">

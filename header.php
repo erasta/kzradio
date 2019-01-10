@@ -8,34 +8,37 @@
 	}
 	?>" />
 	<script>
-		if (window.location.hostname.indexOf("beta.kzradio.net") != -1) {
-			console.log("Beta dev site - no analytics.")
-		} else {
-			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-			ga('create', 'UA-30034653-1', 'auto');
-			ga('send', 'pageview');
-		}
-	</script>
+        <?php if (strpos($_SERVER["HTTP_HOST"], "beta.kzradio.net") === FALSE) { ?>
+            /////<!-- Google Tag Manager -->
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-W8VQ534');
+            /////<!-- End Google Tag Manager -->
 
-    <!-- Facebook Pixel Code -->
-    <script>
-        if (window.location.hostname.indexOf("beta.kzradio.net") != -1) {
-            console.log("Beta dev site - no pixel.")
-        } else {
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '791624944509880');
-            fbq('track', 'PageView');
-        }
+            ////// Google Analytic Code
+			// (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			// (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			// m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			// })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+			// ga('create', 'UA-30034653-1', 'auto');
+			// ga('send', 'pageview');
+
+            ////// Facebook Pixel Code
+            // !function(f,b,e,v,n,t,s)
+            // {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            // n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            // if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            // n.queue=[];t=b.createElement(e);t.async=!0;
+            // t.src=v;s=b.getElementsByTagName(e)[0];
+            // s.parentNode.insertBefore(t,s)}(window, document,'script',
+            // 'https://connect.facebook.net/en_US/fbevents.js');
+            // fbq('init', '791624944509880');
+            // fbq('track', 'PageView');
+        <?php } else { ?>
+            console.log("Beta dev site - no analytics.")
+        <?php } ?>
     </script>
     <noscript>
       <img height="1" width="1" style="display:none"
@@ -58,6 +61,14 @@
 
 </head>
 <body <?php body_class(); ?>>
+
+<?php if (strpos($_SERVER["HTTP_HOST"], "beta.kzradio.net") === FALSE) { ?>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8VQ534" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<?php } else { ?>
+    <script>console.log("Beta dev site - no analytics on body.")</script>
+<?php } ?>
 
 <div class="container-fluid bg-dark" style="padding: 0;">
 	<div class="row " id="header">

@@ -3,7 +3,6 @@
  * Template Name: Shows
  * The template for displaying all posts.
  */
-
 get_header();
 ?>
 
@@ -25,9 +24,9 @@ get_header();
 						<div class="col-sm-12">
 							<?php /*<form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="shows-filter">*/ ?>
 							<form action="<?php echo site_url() ?>/last-shows #response" method="POST" id="shows-filter">
-								<!--<div class="text-row">
-									<input id="textsearch" type="text" name="free_search" placeholder="חיפוש חופשי" />
-								</div>-->
+								<div class="text-row row justify-content-center col-sm-12 col-md-10 offset-md-1">
+									<input id="textsearch" type="text" name="free_search" placeholder="חיפוש חופשי" autocomplete="off" />
+								</div>
 								<div class="select-row row justify-content-center col-sm-12 col-md-10 offset-md-1">
 
 									<div class="col-sm-12 col-md-4" style="text-align: center;">
@@ -90,7 +89,7 @@ get_header();
 							</form>
 							<div id="response">
 								<?php
-								if( isset( $_POST['showsfilter']) || isset( $_POST['djsfilter']) || isset( $_POST['showtypesfilter'] ) ) {
+								if( $_GET['filtered'] == 'true' || isset( $_POST['showsfilter']) || isset( $_POST['djsfilter']) || isset( $_POST['showtypesfilter'] ) || isset($_POST['free_search']) ) {
 									shows_filter_function();
 									wp_reset_postdata();
 								} else {
@@ -124,8 +123,8 @@ get_header();
 													'end_size'     => 2,
 													'mid_size'     => 1,
 													'prev_next'    => true,
-													'prev_text'    => sprintf( ''  ),
-													'next_text'    => sprintf( '' ),
+													'prev_text'    => sprintf( '&Lt;'  ),
+													'next_text'    => sprintf( '&Gt;' ),
 													'add_args'     => false,
 													'add_fragment' => '',
 												) );
@@ -139,6 +138,10 @@ get_header();
                             </div>
 							<script>
 								jQuery(document).ready(function () {
+									jQuery('.kz-pagination a').each(function(){
+										//console.log( jQuery(this).attr('href') );
+										jQuery(this).attr('href', string = jQuery(this).attr('href').split('#038')[0]);
+									})
 									jQuery('#shows-filter').submit(function(e){
 										e.stopPropagation();
 										e.preventDefault();
@@ -151,9 +154,9 @@ get_header();
 												filter.find('button').text('מחפש...'); // changing the button label
 											},
 											success:function(data){
-												filter.find('button').text('חפש'); // changing the button label back
+												filter.find('button').text('זיקוק'); // changing the button label back
 												var result = jQuery(data).find('#response').html();
-												console.log( result + '****' );
+												// console.log( result + '****' );
 												jQuery('#response').html(result);
 											}
 										});
@@ -165,7 +168,7 @@ get_header();
 									jQuery('input[type=reset]').click(function() {
 										jQuery('button.search').removeClass('cta');
 										setTimeout(function() {
-											jQuery('#shows-filter').submit();			
+											jQuery('#shows-filter').submit();
 										}, 100);
 									})
 								})

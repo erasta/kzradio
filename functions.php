@@ -81,6 +81,27 @@ function my_acf_save_post($options) {
 }
 add_action('acf/save_post', 'my_acf_save_post', 1);
 
+/** Add all CPT's to At A Glance */
+add_action( 'dashboard_glance_items', 'cpad_at_glance_content_table_end' );
+function cpad_at_glance_content_table_end() {
+	$args     = array(
+		'public'   => true,
+		'_builtin' => false
+	);
+	$output   = 'object';
+	$operator = 'and';
+
+	$post_types = get_post_types( $args, $output, $operator );
+	foreach ( $post_types as $post_type ) {
+		$num_posts = wp_count_posts( $post_type->name );
+		$num       = number_format_i18n( $num_posts->publish );
+		$text      = _n( $post_type->labels->singular_name, $post_type->labels->name, intval( $num_posts->publish ) );
+		if ( current_user_can( 'edit_posts' ) ) {
+			$output = '<a href="edit.php?post_type=' . $post_type->name . '">' . $num . ' ' . $text . '</a>';
+			echo '<li class="post-count ' . $post_type->name . '-count">' . $output . '</li>';
+		}
+	}
+}
 
 /**
 *  Post Types
@@ -250,3 +271,24 @@ add_filter('upload_mimes', 'cc_mime_types');
          
 // add the filter 
 //add_filter( 'wpseo_opengraph_image', 'filter_wpseo_opengraph_image', 10, 1 ); 
+
+add_action('admin_footer', function() {
+?>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        //taxonomy
+        var tx = 'shows';
+
+        var $scope = $('#' + tx + '-all > ul');
+        $('body.post-type-show #publish').click(function(){
+            if ($scope.find('input:checked').length > 0) {
+                return true;
+            } else {
+                alert('שכחת לסמן תוכנית :)');
+                return false;
+            }
+        });
+    });
+</script>
+<?php
+});

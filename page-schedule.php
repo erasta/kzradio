@@ -38,6 +38,7 @@ get_header();
 							$shows[$daynum] = $origshows[$daynum];
 							$shows[$daynum]['times'] = array();
 							foreach ($daydata['times'] as $timenum => $times) {
+                                if ($times['hide_on_schedule']) continue;
 								if ($times['starthour'] < 5) {
 									$times['starthour'] += 24;
 									$times['endhour'] += 24;

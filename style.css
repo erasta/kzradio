@@ -348,7 +348,7 @@ h1.shows-main-title {
 	display: flex;
 	-webkit-display: flex;
 	flex-flow: row wrap;
-	margin-bottom: 1rem;
+	margin: 0 auto 1rem;
 }
 .select-row {
 	display: flex;
@@ -357,20 +357,30 @@ h1.shows-main-title {
 	margin: 0 auto 1rem;
 }
 input, select {
-	border-radius: none;
+	border-radius: 0;
+}
+input:focus, select:focus {
+	outline: 0 !important;
+	box-shadow: none !important;
+	border: 0 !important;
+}
+input[name=free_search]:focus {
+	background: transparent !important;
+	border-bottom: 2px solid !important;
 }
 input[name=free_search] {
-	max-width: 375px;
 	width: 100%;
 	font-family: Rubik, arial, sans-serif;
-	font-size: 16px;
-	font-weight: 500;
-	color: #ffffff;
-	margin: 0 auto;
-	background-color: transparent;
-	border: none;
-	border-bottom: 2px solid #ffffff;
-	border-radius: 0;
+	font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid #ffffff;
+    border-radius: 0;
+    margin: 0 36px 1rem;
+    padding: 4px;
 }
 
 ::placeholder {
@@ -392,7 +402,6 @@ input[name=free_search] {
 	background-color: #ef303b;
 	border: solid 3px #ffffff;
 	color: #ffffff;
-	outline: none;
 }
 .shows-wrapper .select-row select {
 	background-color: #1b1d1c;
@@ -653,6 +662,19 @@ input[type=reset] {
 .kz-pagination {
 	text-align: center;
 	color: #fff;
+    margin: 3rem 0 4rem;
+	font-size: 20px;
+	vertical-align: middle;
+	font-family: Henri, arial, sans-serif;
+}
+.kz-pagination a {
+    margin: 0 4px;
+}
+.kz-pagination a:hover {
+    text-decoration: underline;
+}
+span.page-numbers.current {
+    text-decoration: underline;
 }
 
 @keyframes glowing {
@@ -1444,8 +1466,8 @@ a.about-anchor:active {
 }
 
 .chart-container input,
-.chart-container textarea { 
-	margin: 0 5px; border: 1px solid #1b1b1c; font-size: 17px; color: #1b1b1c; width: 100%; padding: 10px; border-radius: 0; background: transparent; outline: 0; text-align: center; 
+.chart-container textarea {
+	margin: 0 5px; border: 1px solid #1b1b1c; font-size: 17px; color: #1b1b1c; width: 100%; padding: 10px; border-radius: 0; background: transparent; outline: 0; text-align: center;
 }
 .chart-container input[type="checkbox"] {
 	float: right;

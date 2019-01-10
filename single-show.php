@@ -49,10 +49,13 @@ get_header();
 							<?php
 								$title = get_the_title();
 								$p_title = str_replace("'", "", $title);
-							?>
-                            <a class="play-show" href="javascript:loadmp3('<?php the_field('stream_link'); ?>','<?php echo $p_title; ?>', '<?php echo $thumbnail; ?>')">
-                                <img src="<?php echo get_template_directory_uri(); ?>/uploads/play.png" />
-                            </a>
+							 	$stream_link = get_field('stream_link');
+							
+								if ($stream_link): ?>
+		                            <a class="play-show" href="javascript:loadmp3('<?php echo $stream_link; ?>','<?php echo $p_title; ?>', '<?php echo $thumbnail; ?>')">
+        		                        <img src="<?php echo get_template_directory_uri(); ?>/uploads/play.png" />
+                		            </a>
+							<?php endif; ?>
 
 							<div class="episode-content">
 								<?php the_content(); ?>
