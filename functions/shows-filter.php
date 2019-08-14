@@ -1,12 +1,37 @@
 <?php
+
+// custom query filter to search title custom fields from "free_search"
+add_action( 'pre_get_posts', function( $q ) {
+    if( $title = $q->get( '_meta_or_title' ) ) {
+        add_filter( 'get_meta_sql', function( $sql ) use ( $title ) {
+            global $wpdb;
+
+            // Only run once:
+            static $nr = 0; 
+            if( 0 != $nr++ ) return $sql;
+
+            // Modified WHERE
+            $sql['where'] = sprintf(
+                " AND ( %s OR %s ) ",
+                $wpdb->prepare( "{$wpdb->posts}.post_title like '%%%s%%'", $title),
+                mb_substr( $sql['where'], 5, mb_strlen( $sql['where'] ) )
+            );
+
+            return $sql;
+        });
+    }
+});
+
 function shows_filter_function(){
-    $args = array(
+	// set args for the query
+	$args = array(
         'orderby' => 'date',
         'order' => 'desc',
         'post_type' => 'show',
         'posts_per_page' => '10',
         'paged' => $paged,
     );
+	
     if( $_POST ['showtypesfilter'] || $_POST ['djsfilter'] || $_POST ['showsfilter'] || $_POST['free_search'] )
         $pagination_args = array('filtered'=>'true');
     else
@@ -146,17 +171,25 @@ function shows_filter_function(){
         }
     }
 
-
-
     if( isset( $_REQUEST['free_search'] ) ) {
-        $args['s'] = $_REQUEST['free_search'];
-        // $args['tax_query'] = array(
-        //     'relation' => 'OR',
-        //     array(
-        //         'taxonomy' => array('shows', 'show_type','djs'),
-        //         'name__like' => $_REQUEST['free_search']
-        //     ),
-        // );
+		$meta_query = array();
+		$search_string = $_REQUEST['free_search'];
+
+		$meta_query[] = array(
+			'key' => 'show_playlist',
+			'value' => $search_string,
+			'compare' => 'LIKE'
+		);
+
+		//if there is more than one meta query 'or' them
+		if(count($meta_query) > 1) {
+			$meta_query['relation'] = 'OR';
+		}
+
+		// add args to query
+		$args['_meta_or_title'] = $search_string; // see the filter on top of the file
+		$args['meta_query'] = $meta_query;
+		
         if( $_POST['free_search'] && !($_GET['free_search']) ) {
             $pagination_args['free_search'] = urlencode($_REQUEST['free_search']);
         }

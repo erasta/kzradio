@@ -11,7 +11,7 @@ get_header();
 	<div class="row">
 		<div id="content" role="main">
 			<?php if(have_posts()): while(have_posts()): the_post(); ?>
-				<article role="article" id="post_<?php the_ID()?>" <?php post_class('episode-container');?>>
+				<article role="article" id="post_<?php the_ID()?>" <?php post_class('episode-container');?> <?php if( get_field('adv_show')) echo 'style="background-color:'.get_field('background_color').'; background-blend-mode: multiply;"';?>>
 					<?php
 						$show = wp_get_post_terms($post->ID, 'shows');
                         $djs_term = wp_get_post_terms($post->ID, 'djs');
@@ -27,21 +27,40 @@ get_header();
 					<header id="episode-header" class="center-bg" style="background-image: url('<?php echo $thumbnail; ?>');<?php echo $backpos; ?>">
 						<div id="episode-meta">
                             <div class="episode-dj-title">
-                                <?php foreach ($djs_term as $term) { ?>
-                                    <span><a href="<?php echo get_term_link( $term ) ?>" class="data od-show-dj"><?php echo $term->name; ?></a></span>
-                                <?php } ?>
+                                <?php if(get_field('adv_show')){?>
+									<img class="adv-logo-show" src="<?php the_field('adv_logo'); ?>" alt="<?php echo $term->name; ?>">
+								<?php } else {
+									foreach ($djs_term as $term) { ?>
+										<span><a href="<?php echo get_term_link( $term ) ?>" class="data od-show-dj"><?php echo $term->name; ?></a></span>
+									<?php } 
+								} ?>
                             </div>
-                            <h1 class="episode-show-title">
-                                <span>
-									<a href="<?php echo get_term_link( $show['0']->term_id ); ?>">
-										<?php echo $show['0']->name; ?>
-									</a>
-                                </span>
-                            </h1>
-							<h2 class="episode-title"
-								<?php if (strpbrk(get_the_title(), "אבגדהוזחטיכלמנסעפרקשתןםךףץ") == false) echo "style='direction: ltr'"; ?> >
-                                <span><?php the_title(); ?></span>
-                            </h2>
+                            
+							<?php if(get_field('adv_show')) { ?>
+								<h2 class="episode-title"
+									<?php if (strpbrk(get_the_title(), "אבגדהוזחטיכלמנסעפרקשתןםךףץ") == false) echo "style='direction: ltr'"; ?> >
+									<span><?php the_title(); ?></span>
+								</h2>
+								<h1 class="episode-show-title">
+									<span>
+										<a href="<?php echo get_term_link( $show['0']->term_id ); ?>">
+											<?php echo $show['0']->name; ?>
+										</a>
+									</span>
+								</h1>
+							<?php } else { ?>
+								<h1 class="episode-show-title">
+									<span>
+										<a href="<?php echo get_term_link( $show['0']->term_id ); ?>">
+											<?php echo $show['0']->name; ?>
+										</a>
+									</span>
+								</h1>
+								<h2 class="episode-title"
+									<?php if (strpbrk(get_the_title(), "אבגדהוזחטיכלמנסעפרקשתןםךףץ") == false) echo "style='direction: ltr'"; ?> >
+									<span><?php the_title(); ?></span>
+								</h2>
+							<?php } ?>
                         </div>
 					</header>
 					<main>

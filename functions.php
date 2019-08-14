@@ -54,7 +54,7 @@ if( function_exists('acf_add_options_page') ) {
 *  Disables WordPress Rest API for external requests
 */
 function restrict_rest_api_to_localhost() {
-    $whitelist = array('127.0.0.1', "::1");
+    $whitelist = array('127.0.0.1', "::1", "https://www.kzradio.net");
 
     if(!in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
         die('REST API is disabled.');
@@ -64,7 +64,7 @@ add_action( 'rest_api_init', 'restrict_rest_api_to_localhost', 1 );
 
 
 /**
-*  Disables WordPress Rest API for external requests
+*  Add CPT to archive
 */
 function add_cpt_to_archives( $query ) {
   if( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) {

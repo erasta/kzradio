@@ -585,7 +585,7 @@ body, input, textarea {
 		font-size: 26px;
 	}
 	#wrapper-home .on-demand-items {
-		height: 425px;
+		/*height: 425px;*/
 		overflow: hidden;
 	}
 	#wrapper-home  .kz-vid-iframe {

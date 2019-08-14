@@ -148,8 +148,22 @@ footer {
     align-items: center;
 }
 
+.icons-container.social { 
+	flex-flow: row wrap;
+	padding: 0 2rem;
+}
+
 .icons-container a {
     margin: 0 1rem;
+}
+.icons-container a.social-icon { 
+    margin: 1rem 0 2rem;
+    flex: 1 0 20%;
+	transition: transform .2s ease-out; 
+}
+
+.icons-container a.social-icon:hover {
+	transform: translateY(-8px);
 }
 
 .icons-container img {
@@ -159,6 +173,8 @@ footer {
 .social .icons-container img {
     height: 32px;
 }
+
+
 
 /* Footer styles - end */
 
@@ -676,6 +692,11 @@ input[type=reset] {
 .kz-pagination a {
     margin: 0 4px;
 }
+.kz-pagination a,
+.kz-pagination .current,
+.kz-pagination .dots {
+	text-shadow: 2px 2px 1px rgba(0,0,0,.5);
+}
 .kz-pagination a:hover {
     text-decoration: underline;
 }
@@ -748,6 +769,10 @@ span.page-numbers.current {
     font-weight: 400;
 	font-size: 30px;
 	padding: 0;
+}
+#episode-header #episode-meta .adv-logo-show {
+	height: 40px;
+	width: auto;
 }
 
 #episode-header #episode-meta h1.episode-show-title span,

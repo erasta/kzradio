@@ -103,7 +103,7 @@ function playerInit($) {
 				//stop spinner here
 				logdebug("player loadeddata event");
 			},
-			cssSelectorAncestor: "#jp_container_1",
+            cssSelectorAncestor: "#jp_container_1",
 			timeupdate: function(event) {
 				$("#jp_container_1 .jp-ball").css("left",event.jPlayer.status.currentPercentAbsolute + "%");
 			},
@@ -114,7 +114,7 @@ function playerInit($) {
 // 				debugger;
 				if (is_live)
 				{
-    				jQuery("#jquery_jplayer_1").jPlayer("clearMedia");					
+    				jQuery("#jquery_jplayer_1").jPlayer("clearMedia");
 // 					jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: livestream});
 				}
 			},
@@ -132,7 +132,7 @@ function playerInit($) {
 				//if(ready && event.jPlayer.error.type === $.jPlayer.error.URL_NOT_SET)
 				if (is_live)
 				{
-					if(!is_playing) 
+					if(!is_playing)
 					{
 						// Setup the media stream again and play it.
 						jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: livestream});

@@ -69,6 +69,19 @@
 <?php } else { ?>
     <script>console.log("Beta dev site - no analytics on body.")</script>
 <?php } ?>
+<?php 
+	if (is_archive()) {
+		$logoUrl = wp_get_attachment_url( get_field('logo', 'options') );
+		$donateButton = wp_get_attachment_url( get_field('donate_button', 'options') );
+		$donateImage = wp_get_attachment_url( get_field('donate_image', 'options') );
+		$searchUrl = wp_get_attachment_url(get_field('search_icon', 'options'));
+    } else {
+        $logoUrl = get_field('logo', 'options');
+		$donateButton = get_field('donate_button', 'options');
+		$donateImage = get_field('donate_image', 'options');
+		$searchUrl = get_field('search_icon', 'options');
+    }
+?>
 
 <div class="container-fluid bg-dark" style="padding: 0;">
 	<div class="row " id="header">
@@ -77,23 +90,22 @@
 				<?php $search = get_field('search_icon', 'options'); ?>
 				<!--<a class="trigger-search" href="#" data-toggle="modal" data-target="#searchModal">-->
 				<a class="trigger-search" href="<?php echo get_site_url().'/last-shows'; ?>" data-toggle="modal" data-target="#searchModal">
-					<img class="search-icon" src="<?php echo $search['sizes']['large']; ?>" />
+					<img class="search-icon" src="<?php echo $searchUrl; ?>" />
 				</a>
 				<a href="<?php the_field('donate_link', 'options'); ?>" class="donate-link">
-					<img class="donate-button" src="<?php the_field('donate_button', 'options'); ?>"/>
-					<img class="donate-image" src="<?php the_field('donate_image', 'options'); ?>"/>
+					<img class="donate-button" src="<?php echo $donateButton; ?>"/>
+					<img class="donate-image" src="<?php echo $donateImage; ?>"/>
 				</a>
 			</div>
 
 			<div class="header-main">
-				<?php $logo = get_field('logo', 'options'); ?>
 				<!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>-->
 				<div>
 					<a class="navbar-brand" href="/">
 						<canvas id="plasma" style="display: none"></canvas>
-						<img id="logo-img" src="<?php echo $logo['sizes']['large']; ?>" class="logo" alt="<?php echo $logo['alt']; ?>" />
+						<img id="logo-img" src="<?php echo $logoUrl; ?>" class="logo" alt="<?php echo get_bloginfo('name'); ?>" />
 					</a>
 				</div>
 
@@ -118,6 +130,14 @@
 				<a href="https://www.bpm-music.com/" class="social-icon" target="_blank">
 					<img src="/wp-content/uploads/2018/08/bpm@2x.png" title="BPM">
 				</a>
+				<div class="adv-wrapper">
+					<a href="https://pandazzz.co.il/" class="social-icon adv-logo" target="_blank">
+						<img src="/wp-content/themes/kzradio/uploads/panda-white@2x.png" title="Panda">
+					</a>
+					<a href="https://www.payngo.co.il/" class="social-icon adv-logo" target="_blank">
+						<img src="/wp-content/themes/kzradio/uploads/mh-logo@2x.jpg" title="מחסני חשמל">
+					</a>
+				</div>
 			</div>
 		</nav>
 	</div>
