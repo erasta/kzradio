@@ -63,56 +63,62 @@ get_header();
 					?>
 
 					<div class="schedule-table clearfix">
-						<?php
-							foreach ($shows as $daynum => $daydata) {
-								if( $daynum == $currdaynum ) {
-									echo '<div class="day-column active-day">';
-								} else {
-									echo '<div class="day-column">';
-								}
-                                echo '<div class="day-title">' . $schedule_days_titles[$daynum];
-                                    echo '<div class="day-title-date">';
-                                        echo date('d/m', strtotime('+'.($daynum-date('w')).' days'));
-                                    echo '</div>';
-                                echo '</div>';
-
-                                $lastend = 0;
-                                $lasttime = reset($changehours);
-
-								foreach ($daydata["times"] as $startnum => $times) {
-
-                                    $startnum = array_search(round($times['starthour'] * 100), $changehoursnums);
-                                    $endnum = array_search(round($times['endhour'] * 100), $changehoursnums);
-                                    $times['len'] = $endnum - $startnum;
-                                    $times['beforelen'] = $startnum - $lastend;
-                                    $times['beforetime'] = $lasttime;
-                                    $lastend = $endnum;
-                                    $lasttime = $times['end'];
-
-                                    if( $times['beforelen'] > 0 ) {
-                                        echo '<div class="show-box" style="background: rgba(0,0,0,0); height: ' . $times['beforelen']*80 . 'px">';
-                                            // echo '<div class="show-hour">' . showTimeSpan($times['beforetime'], $times['start']) . '</div>';
-                                        echo '</div>';
-                                    }
-
-									$id = $daydata["day"] . '_' . $times['starthour'];
-									$clazz = 'show-box cat-' . $times['term'];
-									if ($daynum == $currdaynum && $times['starthour'] <= $currhour && $currhour <= $times['endhour']) {
-										$clazz .= ' active';
-                                    }
-                                    $style = 'height: ' . $times['len']*80 . 'px';
-									echo '<div id="' . $id . '" class="' . $clazz . '" realtime="' . $times['realtime'] . '" style="' . $style . '">';
-// 										echo '<img src="' . $times['image'] . '">';
-										echo '<div class="show-hour">' . showTimeSpan($times['start'], $times['end']) . '</div>';
-										echo '<div class="dj-and-name">';
-											echo '<a href="' . $times['linkdj'] . '">' . $times['dj'] . '</a>';
-											echo '<a href="' . $times['linkshow'] . '"><b>' . $times['show'] . '</b></a>';
+						<div class="mobile-slides">
+							<?php
+								foreach ($shows as $daynum => $daydata) {
+									if( $daynum == $currdaynum ) {
+										echo '<div class="day-column active-day">';
+									} else {
+										echo '<div class="day-column">';
+									}
+									echo '<div class="day-title">' . $schedule_days_titles[$daynum];
+										echo '<div class="day-title-date">';
+											echo date('d/m', strtotime('+'.($daynum-date('w')).' days'));
 										echo '</div>';
-                                    echo '</div>';
+									echo '</div>';
+
+									$lastend = 0;
+									$lasttime = reset($changehours);
+
+									foreach ($daydata["times"] as $startnum => $times) {
+
+										$startnum = array_search(round($times['starthour'] * 100), $changehoursnums);
+										$endnum = array_search(round($times['endhour'] * 100), $changehoursnums);
+										$times['len'] = $endnum - $startnum;
+										$times['beforelen'] = $startnum - $lastend;
+										$times['beforetime'] = $lasttime;
+										$lastend = $endnum;
+										$lasttime = $times['end'];
+
+										if( $times['beforelen'] > 0 ) {
+											echo '<div class="show-box" style="background: rgba(0,0,0,0); height: ' . $times['beforelen']*80 . 'px">';
+												// echo '<div class="show-hour">' . showTimeSpan($times['beforetime'], $times['start']) . '</div>';
+											echo '</div>';
+										}
+
+										$id = $daydata["day"] . '_' . $times['starthour'];
+										$clazz = 'show-box cat-' . $times['term'];
+										if ($daynum == $currdaynum && $times['starthour'] <= $currhour && $currhour <= $times['endhour']) {
+											$clazz .= ' active';
+										}
+										$style = 'height: ' . $times['len']*80 . 'px';
+										echo '<div id="' . $id . '" class="' . $clazz . '" realtime="' . $times['realtime'] . '" style="' . $style . '">';
+	// 										echo '<img src="' . $times['image'] . '">';
+											echo '<div class="show-hour">' . showTimeSpan($times['start'], $times['end']) . '</div>';
+											echo '<div class="dj-and-name">';
+												echo '<a href="' . $times['linkdj'] . '">' . $times['dj'] . '</a>';
+												echo '<a href="' . $times['linkshow'] . '"><b>' . $times['show'] . '</b></a>';
+											echo '</div>';
+										echo '</div>';
+									}
+									echo '</div>';
 								}
-								echo '</div>';
-							}
-						?>
+							?>
+						</div>
+					</div><!--.mobile-slides-->
+					<div class="mobile-only controls">
+						<a href="#" class="arrow prev">▶</a>
+						<a href="#" class="arrow next">◀</a>
 					</div>
 				</div>
 			</div><!--#wrapper-schedule-->

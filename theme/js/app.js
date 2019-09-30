@@ -1,5 +1,13 @@
-jQuery(document).ready(function ($) {
+jQuery(window).load(function(){
+	if(jQuery('#wrapper-home #shows-curr-and-next').length && jQuery(window).width() < 767){
+		var headerHeight = jQuery('#header').height();
+		var playerHeight = jQuery('.floating-bar > .inner').height();
+		console.log('calc(100vh - ' + (headerHeight+playerHeight) + 'px)');
+		jQuery('#wrapper-home #shows-curr-and-next').css({'height': 'calc(100vh - ' + (headerHeight+playerHeight) + 'px)'});
+	}
+});
 
+jQuery(document).ready(function ($) {
 	$('#shows-filter').submit(function(e){
 		e.stopPropagation();
 		e.preventDefault();
@@ -31,9 +39,9 @@ jQuery(document).ready(function ($) {
 	});
 
 	if ($('.share').length) {
-   		jQuery(window).on('scroll', function () {
-	        var top = jQuery(window).scrollTop(),
-	            divBottom = jQuery('.share .buttons').offset().top + jQuery('.share .buttons').outerHeight();
+   		$(window).on('scroll', function () {
+	        var top = $(window).scrollTop(),
+	            divBottom = $('.share .buttons').offset().top + $('.share .buttons').outerHeight();
 	        if (divBottom > top) {
 	            setTimeout(function() {
    					$('.share .buttons a').addClass('animated bounce');

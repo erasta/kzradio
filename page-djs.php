@@ -26,6 +26,8 @@ get_header();
                                         $djs = get_terms( array(
                                             'taxonomy' => 'djs',
                                             'hide_empty' => false,
+											'orderby' => 'name',
+										    'order' => 'ASC',
 											'meta_query'		=> array(
 												'relation'		=> 'AND',
 												array(
@@ -35,7 +37,6 @@ get_header();
 												)
 											)
                                         ));
-                                        shuffle( $djs );
                                     ?>
                                     <ul class="items">
 

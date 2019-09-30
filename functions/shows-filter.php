@@ -171,8 +171,20 @@ function shows_filter_function(){
         }
     }
 
-    if( isset( $_REQUEST['free_search'] ) ) {
-		$meta_query = array();
+    if( isset( $_REQUEST['free_search']) && $_REQUEST['free_search'] != '' ) {
+        $args1['fields'] = 'ids';
+        $args1['tax_query'] = array(
+            array(
+                'taxonomy' => 'shows',
+                'field' => 'id',
+                'terms' => $_REQUEST['free_search']
+            )
+        );
+        $shows_ids = get_posts($args1);
+        //var_dump($shows_ids);
+        
+        
+        $meta_query = array();
 		$search_string = $_REQUEST['free_search'];
 
 		$meta_query[] = array(
@@ -187,8 +199,22 @@ function shows_filter_function(){
 		}
 
 		// add args to query
+        $args['fields'] = 'ids';
 		$args['_meta_or_title'] = $search_string; // see the filter on top of the file
-		$args['meta_query'] = $meta_query;
+		$args['posts_per_page'] = '-1';
+        $args['meta_query'] = $meta_query;
+        
+        $free_search_ids = get_posts($args);
+        $merged_ids = array_merge($shows_ids, $free_search_ids);
+
+        $args = array(
+            'orderby' => 'date',
+            'order' => 'desc',
+            'post_type' => 'show',
+            'post__in'  => $merged_ids, 
+            'posts_per_page' => '10',
+            'paged' => $paged,
+		);
 		
         if( $_POST['free_search'] && !($_GET['free_search']) ) {
             $pagination_args['free_search'] = urlencode($_REQUEST['free_search']);
@@ -197,13 +223,16 @@ function shows_filter_function(){
 
     if( get_query_var( 'paged' ) > 1 ) {
         $args['offset'] = 1 + ((get_query_var( 'paged' )-1) * 10);
-    }
+	}
+	
+	echo '<div style="display:none;">';
+		var_dump($args);
+	echo '</div>';
 
     $query = new WP_Query( $args );
     if( $query->have_posts() ) :
         echo '<div class="on-demand-items">';
             while( $query->have_posts() ): $query->the_post();
-
                 get_template_part('loops/show');
 
             endwhile;
@@ -212,7 +241,6 @@ function shows_filter_function(){
         ?>
         <div class="kz-pagination func">
             <?php
-
                 $kzPaginationArgs = array(
                     'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
                     'total'        => $query->max_num_pages,
@@ -232,7 +260,8 @@ function shows_filter_function(){
                     $kzPaginationArgs['add_args'] = $pagination_args;
                 }
 
-                echo paginate_links($kzPaginationArgs);
+				
+				echo paginate_links($kzPaginationArgs);
 
             ?>
         </div>

@@ -1,12 +1,17 @@
 <script type="text/javascript">
 ////////////// Get shows schedule - start //////////////
 
+function getIsraelTime() {
+    return new Date(new Date().toLocaleString("en-US", {timeZone: 'Asia/Jerusalem'}));
+}
+
 function makeShow(realtimeTag, djTag, showTag, imageTag) {
-    var d = new Date(), startTime = new Date(d), endTime = new Date(d);
+    var startTime = getIsraelTime();
+    var endTime = new Date(startTime);
     var realtime = jQuery("#" + realtimeTag).attr("realtime");
     if (realtime && realtime.length > 0) {
         realtime = realtime.split(' ').map(parseFloat);
-        startTime.setDate(realtime[0] - d.getDay() + d.getDate());
+        startTime.setDate(realtime[0] - startTime.getDay() + startTime.getDate());
         endTime.setDate(startTime.getDate());
         startTime.setHours(Math.floor(realtime[1]), Math.floor((realtime[1] % 1) * 60));
         endTime.setHours(Math.floor(realtime[2]), Math.floor((realtime[2] % 1) * 60));
@@ -26,7 +31,7 @@ function makeShow(realtimeTag, djTag, showTag, imageTag) {
 }
 
 function changeActiveShowOnSchedule() {
-    var d = new Date();
+    var d = getIsraelTime();
     var h = d.getHours() + d.getMinutes() / 60 + d.getSeconds() / 3600;
     var elements = document.getElementsByClassName("show-box") || [];
     for (var ind in elements) {

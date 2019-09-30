@@ -174,6 +174,16 @@ footer {
     height: 32px;
 }
 
+@media screen and (max-width: 768px) {
+	
+	.footer-credits { display: block; }
+	
+	.footer-credits > div {
+		flex-basis: 100%;
+		margin-bottom: 1rem;
+	}
+}
+
 
 
 /* Footer styles - end */
@@ -828,6 +838,7 @@ span.page-numbers.current {
 .episode-container .episode-content .playlist {
 	direction: ltr;
 	margin-bottom: 80px;
+	padding: 0 8px;
 }
 .episode-container .episode-content .no-playlist {
 	direction: rtl;
@@ -841,6 +852,11 @@ span.page-numbers.current {
 	margin: 0 auto 10px;
 	border: 1px solid #fff;
 	background: #000000;
+}
+
+@media screen and (max-width: 768px) {
+	#episode-header #episode-meta h1.episode-show-title { font-size: 28px;}
+	#episode-header #episode-meta h2.episode-title { font-size: 32px; }
 }
 
 
@@ -1125,6 +1141,10 @@ body.page-template-page-support-us #main {
 	background: #faca0c;
 }
 
+#wrapper-schedule .controls.mobile-only {
+	display: none;
+}
+
 @media (max-width: 767px) {
 	h1.shows-main-title {
 		padding: 50px 0 0px;/*50px 0 30px;*/
@@ -1185,6 +1205,7 @@ body.page-template-page-support-us #main {
 		float: none;
 		width: 100%;
 		z-index: -1;
+		border-right: 3px solid #fff
 	}
 	#wrapper-schedule .schedule-table .day-column.active-day {
 		z-index: 1;
@@ -1192,6 +1213,29 @@ body.page-template-page-support-us #main {
 	}
 	#wrapper-schedule .schedule-table .day-column .show-box {
 		height: 80px !important;
+	}
+
+	#wrapper-schedule .schedule-wrapper {
+		position: relative;
+	}
+	#wrapper-schedule .controls.mobile-only {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+	}
+	#wrapper-schedule .controls .arrow {
+		position: absolute;
+		top: 20px;
+		z-index: 2;
+		text-decoration: none !important;
+	}
+	#wrapper-schedule .controls .arrow.prev {
+		right: 20px;
+	}
+	#wrapper-schedule .controls .arrow.next {
+		left: 20px;
 	}
 
 	.no-shows-msg {

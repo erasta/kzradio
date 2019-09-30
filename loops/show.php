@@ -4,7 +4,7 @@ $id = get_the_ID();
 $shows_term = wp_get_post_terms($post->ID, 'shows');
 $djs_term = wp_get_post_terms($post->ID, 'djs');
 if (has_post_thumbnail()){
-    $thumbnail = get_the_post_thumbnail_url($id, 'large');
+	$thumbnail = get_the_post_thumbnail_url($id, 'large');
 } else {
     $thumbnail_id = get_field('show_image', 'shows_'.$shows_term['0']->term_id);
     if ($thumbnail_id) {

@@ -85,7 +85,7 @@ get_header();
 						<h2 class="kz-title">תכניות חדשות בארכיון</h2>
 						<div class="on-demand-items">
 							<?php
-								$args = array( 'posts_per_page'=>4, 'post_type'=>'show' );
+								$args = array( 'posts_per_page'=>8, 'post_type'=>'show' );
 								$posts = get_posts( $args );
 								foreach ($posts as $post) {
 
