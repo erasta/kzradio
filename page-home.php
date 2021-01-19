@@ -6,20 +6,62 @@
 
 get_header();
 ?>
+<style>
+@media (max-width: 767px){
+	#wrapper-home .next-shows, #wrapper-home #shows-curr-and-next {
+ 	   height: auto !important;
+	}
+}
+</style>
 <main class="container home" id="main">
 	<div class="row">
 		<div id="content" class="home" role="main">
 			<div id="wrapper-home">
 				<?php
-                // echo 'start-> ' . date('m/d/Y h:i:s a', time());
                 $im_on_home_page = true;
 				get_curr_shows();
-				// echo 'stop-> ' . date('m/d/Y h:i:s a', time());
 				?>
-
+				
 				<div class="kz-title full-schedule-link">
 					<a href="<?php bloginfo('url'); ?>/schedule">ללוח השידורים המלא</a>
 				</div>
+
+				<div id="chart2020-banner" style="">
+					<a href="https://www.kzradio.net/magazine/best-of/26553">
+						<img class="desktop-only" src="<?php echo get_template_directory_uri(); ?>/theme/images/chart2020-banner2.png" alt="המצעד האלטרנטיבי השנתי של רדיו הקצה. ראשון 27.12, שידור חי מ-10:00-22:00." style="width: 100%;">
+						<img class="mobile-only" src="<?php echo get_template_directory_uri(); ?>/theme/images/chart2020-banner2-mobile.png" alt="המצעד האלטרנטיבי השנתי של רדיו הקצה. ראשון 27.12, שידור חי מ-10:00-22:00." style="width: 100%;">
+					</a>
+				</div>
+				<style>
+					#chart2020-banner img.mobile-only {
+						display: none;
+					}
+					@media (max-width: 767px){
+						#chart2020-banner {
+							position: relative;
+							/*height: 300px;*/
+							overflow: hidden;
+						}
+						#chart2020-banner a {
+							display: block;
+						}
+						#chart2020-banner img.desktop-only {
+							display: none;
+						}
+						#chart2020-banner img.mobile-only {
+							display: block;
+						}
+						#chart2020-banner img {
+							position: relative;
+							/*height: 100%;*/
+							/*width: auto !important;*/
+							max-width: none;
+							left: 50%;
+							transform: translateX(-50%);
+						}
+					}
+					
+				</style>
 
 				<div class="broadcasters">
 					<div class="wrapper">
@@ -69,17 +111,7 @@ get_header();
 					</div><!--.wrapper-->
 				</div><!--.broadcasters-->
 
-				<?php /*
-				<div class="featured-banner">
-					<div class="img-wrapper">
-						<img class="desktop-only" src="https://www.kzradio.net/wp-content/uploads/2018/12/kz-radio-2018-1.jpg" alt="המצעד השנתי של הקצה ועונג שבת - 2018">
-						<img class="mobile-only" src="https://www.kzradio.net/wp-content/uploads/2018/12/kz-radio-2018-mobile.jpg" alt="המצעד השנתי של הקצה ועונג שבת - 2018">
-					</div>
-					<a href="https://www.kzradio.net/2018" class="featured-banner-link">האזינו ב-30.12</a>
-				</div><!--.featured-banner-->
-				*/ ?>
-
-
+				
 				<div class="on-demand-and-video">
 					<div class="on-demand">
 						<h2 class="kz-title">תכניות חדשות בארכיון</h2>
@@ -132,7 +164,7 @@ get_header();
 									<a href="<?php the_field( 'podbean_link' ); ?>" target="_blank"><img src="<?php bloginfo('template_url'); ?>/theme/images/podbean.png" alt="הקצה בפודבין"></a>
 									<a href="<?php the_field( 'tune_in_link' ); ?>" target="_blank"><img src="<?php bloginfo('template_url'); ?>/theme/images/tunein.png" alt="הקצה בטיון אין"></a>
 									<a href="<?php the_field( 'apple_music_link' ); ?>" target="_blank"><img src="<?php bloginfo('template_url'); ?>/theme/images/apple-music-icon.png" alt="הקצה באפל מיוזיק"></a>
-									<a href="<?php the_field( 'spotify_link' ); ?>" target="_blank"><img src="<?php bloginfo('template_url'); ?>/theme/images/spotify.svg" alt="הקצה בספוטיפיי"></a>
+									<?php /* <a href="<?php the_field( 'spotify_link' ); ?>" target="_blank"><img src="<?php bloginfo('template_url'); ?>/theme/images/spotify.svg" alt="הקצה בספוטיפיי"></a> */ ?>
 								</div>
 							</div>
 							<div class="on-tv">

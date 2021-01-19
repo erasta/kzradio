@@ -5,11 +5,12 @@
 
 if ( ! function_exists('b4st_setup') ) {
 	function b4st_setup() {
-		add_editor_style('theme/css/editor-style.css');
+		//add_editor_style('theme/css/editor-style.css');
 
 		add_theme_support('title-tag');
 
 		add_theme_support('post-thumbnails');
+		add_theme_support( 'responsive-embeds' );
 
 		update_option('thumbnail_size_w', 285); /* internal max-width of col-3 */
 		update_option('small_size_w', 350); /* internal max-width of col-4 */
@@ -20,17 +21,17 @@ if ( ! function_exists('b4st_setup') ) {
 			$content_width = 1100;
 		}
 
-		add_theme_support( 'post-formats', array(
-			'aside',
-			'gallery',
-			'link',
-			'image',
-			'quote',
-			'status',
-			'video',
-			'audio',
-			'chat'
-		) );
+// 		add_theme_support( 'post-formats', array(
+// 			'aside',
+// 			'gallery',
+// 			'link',
+// 			'image',
+// 			'quote',
+// 			'status',
+// 			'video',
+// 			'audio',
+// 			'chat'
+// 		) );
 
 		add_theme_support('automatic-feed-links');
 	}

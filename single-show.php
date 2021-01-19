@@ -32,10 +32,10 @@ get_header();
 								<?php } else {
 									foreach ($djs_term as $term) { ?>
 										<span><a href="<?php echo get_term_link( $term ) ?>" class="data od-show-dj"><?php echo $term->name; ?></a></span>
-									<?php } 
+									<?php }
 								} ?>
                             </div>
-                            
+
 							<?php if(get_field('adv_show')) { ?>
 								<h2 class="episode-title"
 									<?php if (strpbrk(get_the_title(), "אבגדהוזחטיכלמנסעפרקשתןםךףץ") == false) echo "style='direction: ltr'"; ?> >
@@ -69,7 +69,7 @@ get_header();
 								$title = get_the_title();
 								$p_title = str_replace("'", "", $title);
 							 	$stream_link = get_field('stream_link');
-							
+
 								if ($stream_link): ?>
 		                            <a class="play-show" href="javascript:loadmp3('<?php echo $stream_link; ?>','<?php echo $p_title; ?>', '<?php echo $thumbnail; ?>')">
         		                        <img src="<?php echo get_template_directory_uri(); ?>/uploads/play.png" />
@@ -123,7 +123,11 @@ get_header();
 								if ($playlist) {
 							?>
 									<div class="playlist">
-										<?php the_field('show_playlist'); ?>
+										<?php foreach(explode("\n", str_replace(array("<p>", "</p>"), "\n", $playlist)) as $song) {
+                                            if (trim($song) != "") {
+                                                echo("<p>" . htmlspecialchars($song) . "</p>");
+                                            }
+                                        } ?>
 									</div>
 							<?php
 								} else {

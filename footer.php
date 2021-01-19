@@ -32,9 +32,9 @@
 				<a href="https://www.instagram.com/kzradio/" class="social-icon" target="_blank">
 					<img src="https://www.kzradio.net/wp-content/uploads/2018/11/instagram.svg">
 				</a>
-				<a href="https://open.spotify.com/show/3CCpMyDKH1x4QBGp2xt4yB?fbclid=IwAR0jJIc-Y3Kqe_6gCxK-GjZ8ydVx1WaBkKwUhdyQTfKvEfhkY3eEqVXYUSc" class="social-icon" target="_blank">
+				<!-- <a href="https://open.spotify.com/show/3CCpMyDKH1x4QBGp2xt4yB?fbclid=IwAR0jJIc-Y3Kqe_6gCxK-GjZ8ydVx1WaBkKwUhdyQTfKvEfhkY3eEqVXYUSc" class="social-icon" target="_blank">
 					<img src="https://www.kzradio.net/wp-content/uploads/2019/05/spotify.svg">
-				</a>
+				</a> -->
 				<a href="https://podcasts.apple.com/il/podcast/kzradio-%D7%94%D7%A7%D7%A6%D7%94/id1062683281?fbclid=IwAR3bGsUAy9h4nTbvbCFIs0GbHZFax-zlC_SK6ruMns6wM3klkmdfT8qGcdk" class="social-icon" target="_blank">
 					<img src="https://www.kzradio.net/wp-content/uploads/2019/05/icons8-itunes.svg">
 				</a>
@@ -62,8 +62,8 @@
 <?php wp_footer(); ?>
 
 <?php include_once('schedule.php'); ?>
-<?php include_once('player-footer.js'); ?>
-<?php include_once('document-ready.js'); ?>
+<script><?php include_once('player-footer.js'); ?></script>
+<script><?php include_once('document-ready.js'); ?></script>
 
 </body>
 </html>

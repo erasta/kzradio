@@ -1,15 +1,16 @@
-<script>
-
-// 	livestream = "http://kzradio.livecast.co.il/kzradio_aac/";
-// livestream = "http://kpub.mediacast.co.il:8000/stream";
-livestream = "http://kzradio.mediacast.co.il/kzradio_live/kzradio/icecast.audio";
-//  livestream = "<?php the_field( 'streaming_url', 'option'); ?>";
 is_live=true;
 
+function getLiveStream() {
+	// livestream = "http://kzradio.livecast.co.il/kzradio_aac/";
+	// livestream = "http://kpub.mediacast.co.il:8000/stream";
+	// livestream = "https://kzradio.mediacast.co.il/kzradio_live/kzradio/icecast.audio";
+	livestream = "<?php the_field( 'streaming_url', 'option'); ?>";
+	return livestream;
+}
 
 function loadmp3(mp3file,title,image)
 {
-	logdebug("loadmp3 "+mp3file);
+	console.log(new Date().toLocaleTimeString(), "loadmp3 ", mp3file);
 	jQuery("#jquery_jplayer_1").jPlayer("clearmedia");
 	jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: mp3file});
 	jQuery("#jquery_jplayer_1").jPlayer("play");
@@ -30,9 +31,9 @@ function loadmp3(mp3file,title,image)
 function player_backtolive(image,title)
 {
 	is_live=true;
-	logdebug("load live stream "+livestream);
+	console.log(new Date().toLocaleTimeString(), "load live stream", getLiveStream());
 	jQuery("#jquery_jplayer_1").jPlayer("clearmedia");
-	jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: livestream});
+	jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: getLiveStream()});
 	jQuery("#jquery_jplayer_1").jPlayer("play");
 	jQuery('#jplayer_title').text("שידור חי: "+title);
 	document.getElementById("jp-duration").style.display = "none";
@@ -45,35 +46,23 @@ function player_backtolive(image,title)
 
 function player_stop()
 {
-	logdebug("pause player");
+	console.log(new Date().toLocaleTimeString(), "pause player");
 	jQuery("#jquery_jplayer_1").jPlayer("stop");
 }
 
-function getDateTime() {
-    var now     = new Date();
-    var year    = now.getFullYear();
-    var month   = now.getMonth()+1;
-    var day     = now.getDate();
-    var hour    = now.getHours();
-    var minute  = now.getMinutes();
-    var second  = now.getSeconds();
-    if(month.toString().length == 1) {
-         month = '0'+month;
-    }
-    if(day.toString().length == 1) {
-         day = '0'+day;
-    }
-    if(hour.toString().length == 1) {
-         hour = '0'+hour;
-    }
-    if(minute.toString().length == 1) {
-         minute = '0'+minute;
-    }
-    if(second.toString().length == 1) {
-         second = '0'+second;
-    }
-    var dateTime = year+'/'+month+'/'+day+' '+hour+':'+minute+':'+second;
-     return dateTime;
+function tryToRecoverPlayer() {
+	setTimeout(() => {
+		if (is_live)
+		{
+			if(!is_playing)
+			{
+				console.log(new Date().toLocaleTimeString(), "trying to recover player");
+				// Setup the media stream again and play it.
+				jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: getLiveStream()});
+				jQuery("#jquery_jplayer_1").jPlayer("play");
+			}
+		}
+	}, 1000)
 }
 
 function playerInit($) {
@@ -81,7 +70,7 @@ function playerInit($) {
 	//  player_backtolive_ui();
 	streamInfo={
 		title: "KZRADIO",
-		mp3: livestream
+		mp3: getLiveStream()
 	};
 
 	is_playing=false;
@@ -90,55 +79,63 @@ function playerInit($) {
 		{
 			ready: function ()
 			{
-				logdebug("player ready event");
+				console.log(new Date().toLocaleTimeString(), "player ready event");
 // 				$(this).jPlayer("setMedia", streamInfo);
 			},
 			loadstart: function()
 			{
 				//start spinner here
-				logdebug("player loadstart event");
+				console.log(new Date().toLocaleTimeString(), "player loadstart event");
 			},
 			loadeddata: function()
 			{
 				//stop spinner here
-				logdebug("player loadeddata event");
+				console.log(new Date().toLocaleTimeString(), "player loadeddata event");
 			},
             cssSelectorAncestor: "#jp_container_1",
 			timeupdate: function(event) {
 				$("#jp_container_1 .jp-ball").css("left",event.jPlayer.status.currentPercentAbsolute + "%");
 			},
 			pause: function(event) {
-				logdebug("player pause event");
-				logdebug(JSON.stringify(event));
+				console.log(new Date().toLocaleTimeString(), "player pause event", event);
 				is_playing=false;
-// 				debugger;
 				if (is_live)
 				{
     				jQuery("#jquery_jplayer_1").jPlayer("clearMedia");
-// 					jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: livestream});
+// 					jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: getLiveStream()});
 				}
 			},
 			play: function(event)
 			{
-				logdebug("player play event");
+				console.log(new Date().toLocaleTimeString(), "player play event", event);
 				is_playing=true;
+			},
+		 	warning: function(event)
+			{
+				console.log(new Date().toLocaleTimeString(), "player warning", event);
+			},
+		 	ended: function(event)
+			{
+				console.log(new Date().toLocaleTimeString(), "player ended", event);
+			},
+		 	stalled: function(event)
+			{
+				console.log(new Date().toLocaleTimeString(), "player stalled", event);
 			},
 		 	error: function(event)
 			{
-				logdebug("error event");
-
-				console.log(new Date().toLocaleString(), "player error event", event);
-
+				console.log(new Date().toLocaleTimeString(), "player error", event);
+				tryToRecoverPlayer()
 				//if(ready && event.jPlayer.error.type === $.jPlayer.error.URL_NOT_SET)
-				if (is_live)
-				{
-					if(!is_playing)
-					{
-						// Setup the media stream again and play it.
-						jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: livestream});
-						jQuery("#jquery_jplayer_1").jPlayer("play");
-					}
-				}
+// 				if (is_live)
+// 				{
+// 					if(!is_playing)
+// 					{
+// 						// Setup the media stream again and play it.
+// 						jQuery("#jquery_jplayer_1").jPlayer("setMedia", {mp3: getLiveStream()});
+// 						jQuery("#jquery_jplayer_1").jPlayer("play");
+// 					}
+// 				}
 		    },
 			swfPath: "/js",
 			useStateClassSkin: true,
@@ -200,5 +197,3 @@ function playerInit($) {
 		$("#jquery_jplayer_1").jPlayer.currentTime = maxduration * percentage / 100;
 	};
 }
-
-</script>

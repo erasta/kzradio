@@ -25,6 +25,15 @@ get_header();
 						function showTimeSpan($from, $to) {
 							return ($from  == '23:59' ? '00:00' : $from) . '-' . ($to == '23:59' ? '00:00' : $to);
 						}
+						
+						function fix59($timehour) {
+							if (round(($timehour - floor($timehour)) * 60.0) == 59.0) {
+								return (floor($timehour) + 1) * 100;
+							} else {
+								return round($timehour * 100);
+							}
+						}
+					
 
                         $schedule_days_titles = array( 'יום ראשון', 'יום שני', 'יום שלישי', 'יום רביעי', 'יום חמישי', 'יום שישי', 'יום שבת' );
                         $currdate = new DateTime("now", new DateTimeZone("Israel") );
@@ -33,10 +42,13 @@ get_header();
 
 						// Rotate shows so day start at 5 am and shows before 5am are the prev day
 						$origshows = get_schedule();
+					
 						$shows = array();
-						foreach ($origshows as $daynum => $daydata) {
+						for ($daynum = 0; $daynum < 7; ++$daynum) {
 							$shows[$daynum] = $origshows[$daynum];
 							$shows[$daynum]['times'] = array();
+						}
+						foreach ($origshows as $daynum => $daydata) {
 							foreach ($daydata['times'] as $timenum => $times) {
                                 if ($times['hide_on_schedule']) continue;
 								if ($times['starthour'] < 5) {
@@ -54,8 +66,8 @@ get_header();
 						$changehours = array();
 						foreach ($shows as $daynum => $daydata) {
 							foreach ($daydata['times'] as $timenum => $times) {
-								$changehours[round($times['starthour'] * 100)] = $times['start'];
-								$changehours[round($times['endhour'] * 100)] = $times['end'];
+								$changehours[fix59($times['starthour'])] = $times['start'];
+								$changehours[fix59($times['endhour'])] = $times['end'];
 							}
                         }
 						ksort($changehours);
@@ -82,8 +94,8 @@ get_header();
 
 									foreach ($daydata["times"] as $startnum => $times) {
 
-										$startnum = array_search(round($times['starthour'] * 100), $changehoursnums);
-										$endnum = array_search(round($times['endhour'] * 100), $changehoursnums);
+										$startnum = array_search(fix59($times['starthour']), $changehoursnums);
+										$endnum = array_search(fix59($times['endhour']), $changehoursnums);
 										$times['len'] = $endnum - $startnum;
 										$times['beforelen'] = $startnum - $lastend;
 										$times['beforetime'] = $lasttime;
@@ -121,8 +133,42 @@ get_header();
 						<a href="#" class="arrow next">◀</a>
 					</div>
 				</div>
+				<script>
+					setTimeout(function(){
+						console.log('1');
+						if( jQuery('#wrapper-schedule .schedule-table .day-column').length ) {
+							jQuery('#wrapper-schedule .mobile-slides').height( jQuery('#wrapper-schedule .schedule-table .day-column.active-day').height() );
+							jQuery('#wrapper-schedule .schedule-table').height( jQuery('#wrapper-schedule .schedule-table .day-column.active-day').height() );
+							console.log(jQuery('#wrapper-schedule .schedule-table .day-column.active-day').height());
+
+							jQuery('#wrapper-schedule .controls .arrow.next').click(function(){
+							var currentDayIndex = jQuery(this).parents('.schedule-wrapper').find('.active-day').index();
+							var newDayIndex = currentDayIndex+1;
+							
+							if(currentDayIndex == 6)
+								newDayIndex = 0;
+							
+							jQuery(this).parents('.schedule-wrapper').find('.active-day').removeClass('active-day');
+							jQuery(this).parents('.schedule-wrapper').find('.day-column').eq(newDayIndex).addClass('active-day');
+							return false;
+						});
+						jQuery('#wrapper-schedule .controls .arrow.prev').click(function(){
+							var currentDayIndex = jQuery(this).parents('.schedule-wrapper').find('.active-day').index();
+							var newDayIndex = currentDayIndex-1;
+							
+							if(currentDayIndex == 0)
+								newDayIndex = 6;
+							
+							jQuery(this).parents('.schedule-wrapper').find('.active-day').removeClass('active-day');
+							jQuery(this).parents('.schedule-wrapper').find('.day-column').eq(newDayIndex).addClass('active-day');
+							return false;
+						});
+						}
+					}, 750);
+				</script>
 			</div><!--#wrapper-schedule-->
 		</div><!-- /#content -->
+
 		<?php get_sidebar(); ?>
 	</div><!-- /.row -->
 </main><!-- /.container -->

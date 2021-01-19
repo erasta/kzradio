@@ -12,4 +12,10 @@
 
 body#tinymce {
   padding: 10px !important;
+  height: initial !important!;
+}
+
+.post-type-post {
+  direction: rtl;
+  text-align: right;
 }
