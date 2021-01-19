@@ -66,8 +66,8 @@ function assure_detail(&$obj, $fld, $val) {
 function fill_show_details($obj) {
 	$obj = assure_detail($obj, "show", "הקצה נונסטופ");
 	$obj = assure_detail($obj, "dj", "הקצה");
-	$obj = assure_detail($obj, "image", 'wp-content/uploads/2018/11/pexels-photo-744318.jpeg');
-	$obj = assure_detail($obj, "image_full", 'wp-content/uploads/2018/11/pexels-photo-744318.jpeg');
+	$obj = assure_detail($obj, "image", '/wp-content/uploads/2018/11/pexels-photo-744318.jpeg');
+	$obj = assure_detail($obj, "image_full", '/wp-content/uploads/2018/11/pexels-photo-744318.jpeg');
 	$obj = assure_detail($obj, "desc", "מוזיקת קצה שלא מפסיקה");
 	$obj = assure_detail($obj, "linkshow", "#");
 	$obj = assure_detail($obj, "linkdj", "#");
@@ -118,7 +118,7 @@ function get_schedule() {
 function make_main_banner($showlive) {
 	// echo '<div style="display:none">'; var_dump($showlive); echo '</div>';
 	$blog = get_bloginfo('template_url');
-    $playbtn = array_key_exists("start", $showlive) ? '' : ' display: none';
+    $playbtn = ''; //array_key_exists("start", $showlive) ? '' : ' display: none';
     $objpos = '';
     if (array_key_exists("image_position", $showlive)) {
         $objpos = 'object-position: 50% ' . $showlive["image_position"] . '%';
@@ -159,6 +159,11 @@ function make_main_banner($showlive) {
 function make_next_banner($showfirst, $num) {
     $active = array_key_exists("start", $showfirst) ? '' : ' nonactive';
     $realt = array_key_exists("realtime", $showfirst) ? $showfirst["realtime"] : "";
+	$namelen = strlen(trim($showfirst["show"]));
+	$showfontsize = '';
+	if ($namelen > 30) {
+		$showfontsize = ' style="font-size: ' . (36 - round(sqrt($namelen - 30))) . 'px"';
+	}
 	return
 '<div id="next-show-' . $num . '" class="next-show-item' . $active .'" realtime="' . $realt . '">
 	<div class="show-overlay" style="background: ' . $showfirst["dj_colour"] . ';"></div>
@@ -176,7 +181,7 @@ function make_next_banner($showfirst, $num) {
 				</a>
 			</span>
 			<span class="blck-bg">
-				<a href="' . $showfirst["linkshow"] . '" id="show-name-' . $num . '" class="next-show-name">
+				<a href="' . $showfirst["linkshow"] . '" id="show-name-' . $num . '" class="next-show-name"' . $showfontsize . '>
 					' . htmlspecialchars($showfirst["show"]) . '
 				</a>
 				<br>

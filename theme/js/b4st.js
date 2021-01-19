@@ -16,12 +16,12 @@
 		$('.pagination .dots').addClass('page-link').parent().addClass('disabled');
 
 		// You can put your own code in here
-		if( $('#wrapper-schedule .schedule-table .day-column').length ) {
+		/*if( $('#wrapper-schedule .schedule-table .day-column').length ) {
 			$('#wrapper-schedule .mobile-slides').height( $('#wrapper-schedule .schedule-table .day-column.active-day').height() );
 			$('#wrapper-schedule .schedule-table').height( $('#wrapper-schedule .schedule-table .day-column.active-day').height() );
-		}
+		}*/
 
-		$('#wrapper-schedule .controls .arrow.next').click(function(){
+		/*$('#wrapper-schedule .controls .arrow.next').click(function(){
 			var currentDayIndex = $(this).parents('.schedule-wrapper').find('.active-day').index();
 			var newDayIndex = currentDayIndex+1;
 			
@@ -42,7 +42,7 @@
 			$(this).parents('.schedule-wrapper').find('.active-day').removeClass('active-day');
 			$(this).parents('.schedule-wrapper').find('.day-column').eq(newDayIndex).addClass('active-day');
 			return false;
-		});
+		});*/
 		
 		/*jQuery(".my_button").click(function(){
 
@@ -64,6 +64,9 @@ function (msg) { alert(msg);});
 			
 			return false;
 		});*/
-		
+		$('.chen-link').click(function() {
+			ga('send', 'event', 'Button', 'download-chen-alternative');
+			console.log('download');
+		});
 	});
 }(jQuery));

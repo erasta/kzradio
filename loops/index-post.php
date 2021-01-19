@@ -17,13 +17,13 @@ Used by index.php, category.php and author.php
 	</header>
 	<div>
 		<?php the_post_thumbnail(); ?>
-		<?php if ( has_excerpt( $post->ID ) ) {
+		<?php // if ( has_excerpt( $post->ID ) ) {
 			the_excerpt(); ?>
 			<p><a href="<?php the_permalink(); ?>">
 			<?php _e( '&hellip; ' . __('Continue reading', 'b4st' ) . ' <i class="fas fa-arrow-right"></i>', 'b4st' ) ?>
 			</a></p>
-		<?php } else {
-			the_content( __( '&hellip; ' . __('Continue reading', 'b4st' ) . ' <i class="fas fa-arrow-right"></i>', 'b4st' ) );
-		} ?>
+		<?php // } else {
+			//the_content( __( '&hellip; ' . __('Continue reading', 'b4st' ) . ' <i class="fas fa-arrow-right"></i>', 'b4st' ) );
+		// } ?>
 	</div>
 </article>

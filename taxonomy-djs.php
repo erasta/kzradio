@@ -52,6 +52,16 @@ $email = get_field('email', $taxonomy . '_' . $term_id);
 							<img src="../../wp-content/themes/kzradio/theme/images/social/facebook_white.png" alt="facebook">
 						</a>
 					<?php } ?>
+					<?php if ($website) { ?>
+						<a href="<?php echo $website; ?>" target="_blank">
+							<img src="../../wp-content/themes/kzradio/theme/images/social/globe_white.png" alt="email">
+						</a>
+					<?php } ?>
+					<?php if ($email) { ?>
+						<a href="mailto:<?php echo antispambot($email); ?>" target="_blank">
+							<img src="../../wp-content/themes/kzradio/theme/images/social/envelope_white.png" alt="email">
+						</a>
+					<?php } ?>
 				</div>
 				<div class="on-demand-items container">
 					<?php get_template_part('loops/shows-loop'); ?>

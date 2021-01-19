@@ -172,16 +172,42 @@ function shows_filter_function(){
     }
 
     if( isset( $_REQUEST['free_search']) && $_REQUEST['free_search'] != '' ) {
-        $args1['fields'] = 'ids';
-        $args1['tax_query'] = array(
+        
+		$args1 = array(
+			'orderby' => 'date',
+			'order' => 'desc',
+			'post_type' => 'show',
+			'posts_per_page' => '-1',
+			'paged' => $paged,
+		);
+		$args1['fields'] = 'ids';
+		$args1['tax_query'] = array(
             array(
                 'taxonomy' => 'shows',
-                'field' => 'id',
+                'field' => 'name',
                 'terms' => $_REQUEST['free_search']
             )
-        );
+		);
+		
         $shows_ids = get_posts($args1);
-        //var_dump($shows_ids);
+		
+		$args2 = array(
+			'orderby' => 'date',
+			'order' => 'desc',
+			'post_type' => 'show',
+			'posts_per_page' => '-1',
+			'paged' => $paged,
+		);
+		$args2['fields'] = 'ids';
+		$args2['tax_query'] = array(
+            array(
+                'taxonomy' => 'djs',
+                'field' => 'name',
+                'terms' => $_REQUEST['free_search']
+            )
+		);
+		$djs_ids = get_posts($args2);
+		$first_merged_ids = array_merge($shows_ids, $djs_ids);
         
         
         $meta_query = array();
@@ -205,7 +231,14 @@ function shows_filter_function(){
         $args['meta_query'] = $meta_query;
         
         $free_search_ids = get_posts($args);
-        $merged_ids = array_merge($shows_ids, $free_search_ids);
+        $merged_ids = array_merge($first_merged_ids, $free_search_ids);
+        if(empty($merged_ids)) {
+            $merged_ids = ['issue#28099'];
+        }
+		
+		// echo '<div style="display:none;" class="aaa">';
+		// 	var_dump($djs_ids);
+		// echo '</div>';
 
         $args = array(
             'orderby' => 'date',
@@ -225,11 +258,14 @@ function shows_filter_function(){
         $args['offset'] = 1 + ((get_query_var( 'paged' )-1) * 10);
 	}
 	
-	echo '<div style="display:none;">';
-		var_dump($args);
-	echo '</div>';
+	// echo '<div style="display:none;">';
+	// 	var_dump($args);
+	// echo '</div>';
 
     $query = new WP_Query( $args );
+    // echo '<div style="display:none; color: red;">';
+	// 	var_dump($query);
+	// echo '</div>';
     if( $query->have_posts() ) :
         echo '<div class="on-demand-items">';
             while( $query->have_posts() ): $query->the_post();

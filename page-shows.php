@@ -24,10 +24,10 @@ get_header();
 						<div class="col-sm-12">
 							<?php /*<form action="<?php echo site_url() ?>/wp-admin/admin-ajax.php" method="POST" id="shows-filter">*/ ?>
 							<form action="<?php echo site_url() ?>/last-shows #response" method="POST" id="shows-filter">
-								<div class="text-row row justify-content-center col-sm-12 col-md-10 offset-md-1">
+								<div class="text-row row justify-content-center col-sm-12">
 									<input id="textsearch" type="text" name="free_search" placeholder="חיפוש לפי שם תכנית / שם אמן / שם שיר בפלייליסט" autocomplete="off" />
 								</div>
-								<div class="select-row row justify-content-center col-sm-12 col-md-10 offset-md-1">
+								<div class="select-row row justify-content-center col-sm-12">
 
 									<div class="col-sm-12 col-md-4" style="text-align: center;">
 										<?php
@@ -90,6 +90,7 @@ get_header();
 							<div id="response">
 								<?php
 								if( $_GET['filtered'] == 'true' || isset( $_POST['showsfilter']) || isset( $_POST['djsfilter']) || isset( $_POST['showtypesfilter'] ) || isset($_POST['free_search']) ) {
+									echo '<div style="display: none;">HERE</div>';
 									shows_filter_function();
 									wp_reset_postdata();
 								} else {
@@ -103,7 +104,7 @@ get_header();
 									);
 									$query = new WP_Query( $args );
 
-									if( $query->have_posts() ) :
+									if( $query->have_posts() ) {
 										echo '<div class="on-demand-items">';
 										while( $query->have_posts() ): $query->the_post();
 
@@ -133,7 +134,9 @@ get_header();
 										<?php
 										wp_reset_postdata();
 										echo '</div>';
-									endif;
+									} else {
+										echo 'No results';
+									}
 								}?>
                             </div>
 							<script>
@@ -146,17 +149,18 @@ get_header();
 										e.stopPropagation();
 										e.preventDefault();
 										var filter = jQuery('#shows-filter');
+										var data = filter.serialize();
 										jQuery.ajax({
 											url:filter.attr('action'),
-											data:filter.serialize(), // form data
+											data: data,
 											type:filter.attr('method'), // POST
 											beforeSend:function(xhr){
+												console.log(data);
 												filter.find('button').text('מחפש...'); // changing the button label
 											},
 											success:function(data){
 												filter.find('button').text('זיקוק'); // changing the button label back
 												var result = jQuery(data).find('#response').html();
-												// console.log( result + '****' );
 												jQuery('#response').html(result);
 											}
 										});

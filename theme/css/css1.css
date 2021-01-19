@@ -24,7 +24,7 @@
 	justify-content: center;	
 }
 .shows-list{
-	background-image: url('../images/bg-dj.png');
+	background-image: url('../images/bg-dj.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 	color:#fff;
@@ -101,6 +101,8 @@
 .show-item:hover {
     text-decoration: none;
 }
+
+
 
 @media (max-width: 767px) {
 	.dj-desc, .show-desc {
